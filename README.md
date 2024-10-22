@@ -19,8 +19,17 @@ The inspiration for this application is applications that are related to dating 
 ## Tech Stack
 
 Frontend:
+HTML
+CSS
+TailwindCSS
+Daisy UI/Chackra UI
+Javascript
+React.js
 
 Backend:
+Express.js
+Postgres SQL
+AWS S3 (USER IMAGES/FILES)
 
 ## Features
 
