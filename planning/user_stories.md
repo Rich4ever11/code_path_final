@@ -23,3 +23,6 @@ As a [user role], I want to [what], so that [why]
 5. As a Dating User, I want to introduce a conversation with a dating spot or a meeting location in an appropriate and acceptable manner, so that I can remove wasteful online conversation.
 6. As a Dating User, I want to see the previous people I have matched with and after a certain time connect back with them again to see if there plans/interest have changed, so that I am not forgetting about or disregarding other possible romantic interests.
 7. As a Dating User, I want to block or limit the amount of messages I receive from malicious and dangerous users, so that I feel safe sharing my information and communicating on this platform.
+8. As a Location User, I want to view comments and information about locations I have added, so that I can view other peoples experiences at these locations.
+9. As a Location User, I want to see all the users who have visited a location, so that I can see the demographic of the users interacting with a location
+10. As a Location User, I want to promote my location and have more exposure to my location using a ranking system based on my performance, so that I reach a wider consumer base and/or allow more people to build connections at my location
