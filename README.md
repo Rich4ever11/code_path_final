@@ -1,4 +1,4 @@
-# Connection Finder
+# Loco Connection Finder
 
 CodePath WEB103 Final Project
 
