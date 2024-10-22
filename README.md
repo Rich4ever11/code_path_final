@@ -53,6 +53,14 @@ Once two users are interested both users can send exactly one location that they
 
 ### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
 
+### Comment On, Rate and Open Forum Discuss Locations They Have Visited With Other Users
+
+Allow a user to make comments on a location, reply to comments on a location and give a rating 1/5 on a location. Also allow for a user to verify that they visited a location and upon verification an indication is added to the users comment or profile
+
+### Add Location For Romantic Time or Group/FriendShip Building
+
+Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
+
 ## Installation Instructions
 
 [instructions go here]
