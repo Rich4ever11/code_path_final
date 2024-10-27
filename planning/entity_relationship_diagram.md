@@ -2,6 +2,7 @@
 
 Reference the Creating an Entity Relationship Diagram final project guide in the course portal for more information about how to complete this deliverable.
 
+```
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
 
@@ -86,6 +87,7 @@ Ref: users.id < connection.recieve_user
 
 Ref: connection.id < chat.connection_id 
 
+```
 ## Create the List of Tables
 
 [👉🏾👉🏾👉🏾 List each table in your diagram]
