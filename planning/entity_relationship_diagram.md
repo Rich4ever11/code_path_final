@@ -88,6 +88,9 @@ Ref: users.id < connection.recieve_user
 Ref: connection.id < chat.connection_id 
 
 ```
+
+![image](https://github.com/user-attachments/assets/38a34430-14af-4977-ba84-70f62a82fbe2)
+
 ## Create the List of Tables
 
 [👉🏾👉🏾👉🏾 List each table in your diagram]
