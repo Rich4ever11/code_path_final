@@ -13,6 +13,7 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 ### Add Location
 ### Add Location Blog
 
+# Wireframe Pages
 
 ## Wireframe 1: Hero Page
 
