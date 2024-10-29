@@ -61,6 +61,9 @@ Allow a user to make comments on a location, reply to comments on a location and
 
 Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
 
+### Location Blog Creation, Editing, Deletion
+Bloggers can easily create, update, and delete their location blog posts. Bloggers have complete control over their content, allowing them to share, modify, or remove their posts as needed.
+
 ## Installation Instructions
 
 [instructions go here]
