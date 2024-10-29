@@ -6,7 +6,7 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
 
-Table users {
+Table user {
   id serial [primary key]
   first_name VARCHAR(255)
   last_name VARCHAR(255)
@@ -89,18 +89,25 @@ Ref: connection.id < chat.connection_id
 
 ```
 
-![image](https://github.com/user-attachments/assets/38a34430-14af-4977-ba84-70f62a82fbe2)
-
 ## Create the List of Tables
 
-[👉🏾👉🏾👉🏾 List each table in your diagram]
+Table List:
+  
+  user
+  
+  location
+  
+  location_blog
+  
+  location_comments
+  
+  blog_comments
+  
+  connection
+  
+  chat
+  
 
 ## Add the Entity Relationship Diagram
 
-[👉🏾👉🏾👉🏾 Include an image or images of the diagram below. You may also wish to use the following markdown syntax to outline each table, as per your preference.]
-
-| Column Name | Type | Description |
-|-------------|------|-------------|
-| id | integer | primary key |
-| name | text | name of the shoe model |
-| ... | ... | ... |
+![image](https://github.com/user-attachments/assets/38a34430-14af-4977-ba84-70f62a82fbe2)
