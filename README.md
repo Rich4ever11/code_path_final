@@ -51,8 +51,6 @@ Once two users are interested both users can send exactly one location that they
 
 [gif goes here]
 
-### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
-
 ### Comment On, Rate and Open Forum Discuss Locations They Have Visited With Other Users
 
 Allow a user to make comments on a location, reply to comments on a location and give a rating 1/5 on a location. Also allow for a user to verify that they visited a location and upon verification an indication is added to the users comment or profile
