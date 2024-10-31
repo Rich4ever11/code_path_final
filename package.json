@@ -1,0 +1,12 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "CodePath WEB103 Final Project",
+  "scripts": {
+    "dev": "concurrently \"cd client && vite\" \"cd server && nodemon server\"",
+    "start": "cd server && node server",
+    "build": "cd client && vite build"
+  },
+  "author": "",
+  "license": "ISC"
+}
