@@ -1,4 +1,4 @@
-# Connection Finder
+# Loco Connection Finder
 
 CodePath WEB103 Final Project
 
@@ -35,23 +35,18 @@ AWS S3 (USER IMAGES/FILES)
 
 ### User Profile Creation
 
-Users will be given the ability to create a profile and login with said created profile. The data a user can add and store includes 3 to 5 pictures of the user, what interests they have, physical attributes, hobbies and much more.
+Users will be given the ability to create a profile and login with said created profile. The data a user can add and store includes 3 to 5 pictures of the user, credentials used for authentication, what interests they have, physical attributes, hobbies and much more.
 
-[gif goes here]
 
 ### Search Other Users/Locations
 
 Users will be able to search other users on the web application through either the use of swiping (left for interested or right for interested). Right swiped users will be added to the list of users you can search through. Also you can add locations or view locations users have visited. And from there you can see user reviews of that location, how it went and tag other users that you went with
 
-[gif goes here]
 
 ### Send Location -> Accept/Reject -> Communication Channel Opened
 
 Once two users are interested both users can send exactly one location that they would like to meet and interact at. This can be from our database of locations or a location not yet added. From there if the other user accepts the location a communication channel is initiated and both users can start communicating and setting up a date to meet up.
 
-[gif goes here]
-
-### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
 
 ### Comment On, Rate and Open Forum Discuss Locations They Have Visited With Other Users
 
@@ -60,6 +55,9 @@ Allow a user to make comments on a location, reply to comments on a location and
 ### Add Location For Romantic Time or Group/FriendShip Building
 
 Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
+
+### Location Blog Creation, Editing, Deletion
+Bloggers can easily create, update, and delete their location blog posts. Bloggers have complete control over their content, allowing them to share, modify, or remove their posts as needed.
 
 ## Installation Instructions
 
