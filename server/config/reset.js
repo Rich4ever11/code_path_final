@@ -86,7 +86,8 @@ export const createLocationCommentsTable = async () => {
             id SERIAL PRIMARY KEY,
             CONSTRAINT location_id SERIAL REFERENCES location(id),
             CONSTRAINT user_id SERIAL REFERENCES user(id),
-            created_at NUMERIC(100, 2) NOT NULL
+            created_at NUMERIC(100, 2) NOT NULL,
+            updated_at NUMERIC(100, 2) NOT NULL,
             comment TEXT NOT NULL
         )
     `;
@@ -101,13 +102,14 @@ export const createLocationCommentsTable = async () => {
 
 export const createBlogCommentsTable = async () => {
   const createTableQuery = `
-        DROP TABLE IF EXISTS location_comment CASCADE;
+        DROP TABLE IF EXISTS blog_comment CASCADE;
     
-        CREATE TABLE IF NOT EXISTS location_comment (
+        CREATE TABLE IF NOT EXISTS blog_comment (
             id SERIAL PRIMARY KEY,
-            CONSTRAINT location_id SERIAL REFERENCES location(id),
             CONSTRAINT blog_id SERIAL REFERENCES blog(id),
-            created_at NUMERIC(100, 2) NOT NULL
+            CONSTRAINT user_id SERIAL REFERENCES user(id),
+            created_at NUMERIC(100, 2) NOT NULL,
+            updated_at NUMERIC(100, 2) NOT NULL,
             comment TEXT NOT NULL
         )
     `;
@@ -128,7 +130,7 @@ export const createConnectionTable = async () => {
             id SERIAL PRIMARY KEY,
             CONSTRAINT send_user SERIAL REFERENCES user(id),
             CONSTRAINT receive_user SERIAL REFERENCES user(id),
-            created_at NUMERIC(100, 2) NOT NULL
+            created_at NUMERIC(100, 2) NOT NULL,
             accepted BOOLEAN NOT NULL
         )
     `;
@@ -143,9 +145,9 @@ export const createConnectionTable = async () => {
 
 export const createChatTable = async () => {
   const createTableQuery = `
-        DROP TABLE IF EXISTS connection CASCADE;
+        DROP TABLE IF EXISTS chat CASCADE;
     
-        CREATE TABLE IF NOT EXISTS connection (
+        CREATE TABLE IF NOT EXISTS chat (
             id SERIAL PRIMARY KEY,
             CONSTRAINT connection_id SERIAL REFERENCES connection(id),
             created_at NUMERIC(100, 2) NOT NULL,
@@ -155,9 +157,9 @@ export const createChatTable = async () => {
 
   try {
     const res = await pool.query(createTableQuery);
-    console.log("🎉 connection table created successfully");
+    console.log("🎉 chat table created successfully");
   } catch (err) {
-    console.error("⚠️ error creating connection table", err);
+    console.error("⚠️ error creating chat table", err);
   }
 };
 
