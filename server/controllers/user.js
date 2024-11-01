@@ -1,5 +1,5 @@
-const { createHash } = require("crypto");
-import getTimeInSeconds from "../util/timelib";
+import { createHash } from "crypto";
+import { getTimeInSeconds } from "../util/timelib.js";
 
 function hash_password(password) {
   return createHash("sha256")

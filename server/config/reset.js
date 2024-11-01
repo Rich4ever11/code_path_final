@@ -1,12 +1,11 @@
 import "./dotenv.js";
 import { pool } from "./database.js";
-import { customItems } from "../data/customItems.js";
 
 export const createUserTable = async () => {
   const createTableQuery = `
-    DROP TABLE IF EXISTS user CASCADE;
+    DROP TABLE IF EXISTS users CASCADE;
 
-    CREATE TABLE IF NOT EXISTS user (
+    CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
@@ -15,15 +14,16 @@ export const createUserTable = async () => {
         role VARCHAR(255) NOT NULL,
         bio TEXT NOT NULL,
         email VARCHAR(255) NOT NULL,
+        imgURL TEXT[] NOT NULL,
         created_at NUMERIC(100, 2) NOT NULL
-)
+        )
 `;
 
   try {
     const res = await pool.query(createTableQuery);
     console.log("🎉 user table created successfully");
   } catch (err) {
-    console.error("⚠️ error creating custom item table", err);
+    console.error("⚠️ error creating user table", err);
   }
 };
 
@@ -33,7 +33,7 @@ export const createLocationTable = async () => {
   
       CREATE TABLE IF NOT EXISTS location (
           id SERIAL PRIMARY KEY,
-          CONSTRAINT user_id SERIAL REFERENCES user(id),
+          user_id INTEGER REFERENCES users (id) NOT NULL,
           name VARCHAR(255) NOT NULL,
           description VARCHAR(255) NOT NULL,
           street_name VARCHAR(255) NOT NULL,
@@ -43,7 +43,7 @@ export const createLocationTable = async () => {
           longitude NUMERIC(100, 2) NOT NULL,
           latitude NUMERIC(100, 2) NOT NULL,
           created_at NUMERIC(100, 2) NOT NULL
-      )
+      );
   `;
 
   try {
@@ -60,8 +60,8 @@ export const createBlogTable = async () => {
     
         CREATE TABLE IF NOT EXISTS blog (
             id SERIAL PRIMARY KEY,
-            CONSTRAINT location_id SERIAL REFERENCES location(id),
-            CONSTRAINT user_id SERIAL REFERENCES user(id),
+            location_id INTEGER REFERENCES location (id) NOT NULL,
+            user_id INTEGER REFERENCES users (id) NOT NULL,
             title VARCHAR(255) NOT NULL,
             description VARCHAR(255) NOT NULL,
             blog_content TEXT NOT NULL,
@@ -84,8 +84,8 @@ export const createLocationCommentsTable = async () => {
     
         CREATE TABLE IF NOT EXISTS location_comment (
             id SERIAL PRIMARY KEY,
-            CONSTRAINT location_id SERIAL REFERENCES location(id),
-            CONSTRAINT user_id SERIAL REFERENCES user(id),
+            location_id INTEGER REFERENCES location (id) NOT NULL,
+            user_id INTEGER REFERENCES users (id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             updated_at NUMERIC(100, 2) NOT NULL,
             comment TEXT NOT NULL
@@ -106,8 +106,8 @@ export const createBlogCommentsTable = async () => {
     
         CREATE TABLE IF NOT EXISTS blog_comment (
             id SERIAL PRIMARY KEY,
-            CONSTRAINT blog_id SERIAL REFERENCES blog(id),
-            CONSTRAINT user_id SERIAL REFERENCES user(id),
+            blog_id INTEGER REFERENCES blog(id) NOT NULL,
+            user_id INTEGER REFERENCES users(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             updated_at NUMERIC(100, 2) NOT NULL,
             comment TEXT NOT NULL
@@ -128,8 +128,8 @@ export const createConnectionTable = async () => {
     
         CREATE TABLE IF NOT EXISTS connection (
             id SERIAL PRIMARY KEY,
-            CONSTRAINT send_user SERIAL REFERENCES user(id),
-            CONSTRAINT receive_user SERIAL REFERENCES user(id),
+            send_user INTEGER REFERENCES users(id) NOT NULL,
+            receive_user INTEGER REFERENCES users(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             accepted BOOLEAN NOT NULL
         )
@@ -149,7 +149,7 @@ export const createChatTable = async () => {
     
         CREATE TABLE IF NOT EXISTS chat (
             id SERIAL PRIMARY KEY,
-            CONSTRAINT connection_id SERIAL REFERENCES connection(id),
+            connection_id INTEGER REFERENCES connection(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             message TEXT NOT NULL
         )

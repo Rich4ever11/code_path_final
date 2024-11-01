@@ -1,4 +1,4 @@
-import getTimeInSeconds from "../util/timelib";
+import { getTimeInSeconds } from "../util/timelib.js";
 
 const getAllBlogs = async (request, response) => {
   const getBlogsQuery = `
