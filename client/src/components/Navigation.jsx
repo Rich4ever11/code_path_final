@@ -28,7 +28,7 @@ export default function Navigation() {
         <NavbarItem>
           <Link
             color="foreground"
-            href="#"
+            href="/chat"
             className="text-xl border-b-2 border-orange-50 p-2 rounded-lg shadow-slate-400 italic"
           >
             CHAT
@@ -36,7 +36,7 @@ export default function Navigation() {
         </NavbarItem>
         <NavbarItem isActive>
           <Link
-            href="#"
+            href="/location"
             aria-current="page"
             className="text-xl font-normal border-b-2 border-orange-50 p-2 rounded-lg shadow-slate-400 text-white italic"
           >

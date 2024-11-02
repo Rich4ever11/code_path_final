@@ -1,6 +1,7 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 import Home from "./pages/Home.jsx";
+import Chat from "./pages/Chat.jsx";
 import Location from "./pages/Location.jsx";
 import Navigation from "./components/Navigation.jsx";
 import "./App.css";
@@ -14,6 +15,10 @@ const App = () => {
     {
       path: "/location",
       element: <Location title="List of Locations" />,
+    },
+    {
+      path: "/chat",
+      element: <Chat title="List of Locations" />,
     },
   ]);
 
