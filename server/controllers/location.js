@@ -1,3 +1,5 @@
+import "../config/dotenv.js";
+import { pool } from "../config/database.js";
 import { getTimeInSeconds } from "../util/timelib.js";
 
 const getAllLocations = async (request, response) => {
@@ -17,6 +19,7 @@ const getAllLocations = async (request, response) => {
   }
 };
 
+// route successfully tested
 const createLocation = async (request, response) => {
   const {
     user_id,
@@ -53,7 +56,7 @@ const createLocation = async (request, response) => {
     console.log("🎉 location data added");
     response.status(200).json({ data: result.rows });
   } catch (error) {
-    console.error("⚠️ error grabbing location data: ", error);
+    console.error("⚠️ error creating location data: ", error);
     response.status(500).json({ error: error.message });
   }
 };

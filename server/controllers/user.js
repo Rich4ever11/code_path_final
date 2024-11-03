@@ -1,3 +1,5 @@
+import "../config/dotenv.js";
+import { pool } from "../config/database.js";
 import { createHash } from "crypto";
 import { getTimeInSeconds } from "../util/timelib.js";
 
