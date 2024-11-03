@@ -4,7 +4,7 @@ import { getTimeInSeconds } from "../util/timelib.js";
 
 const getAllBlogs = async (request, response) => {
   const getBlogsQuery = `
-    SELECT (user_id, location_id, title, description, rating, likes, created_at)
+    SELECT (user_id, location_id, title, rating, likes, images, created_at)
     FROM blog
     ORDER BY id ASC
 `;
@@ -33,7 +33,7 @@ const createBlog = async (request, response) => {
   const likes = 0;
 
   const createBlogQuery = `
-      INSERT INTO blog (user_id, location_id, title, description, blog_content, images, rating, likes, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *
+      INSERT INTO blog (user_id, location_id, title, description, blog_content, images, rating, likes, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *
     `;
 
   const createBlogParams = [
@@ -78,8 +78,29 @@ const getBlogById = async (request, response) => {
   }
 };
 
+const getBlogByLocationId = async (request, response) => {
+  const blogId = request.params.id;
+
+  const getBlogByIdQuery = `
+    SELECT *
+    FROM blog
+    WHERE location_id = $1
+    ORDER BY id ASC
+    `;
+
+  try {
+    const result = await pool.query(getBlogByIdQuery, [blogId]);
+    console.log("🎉 blog data obtained");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing blog data: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   getAllBlogs,
   createBlog,
   getBlogById,
+  getBlogByLocationId,
 };

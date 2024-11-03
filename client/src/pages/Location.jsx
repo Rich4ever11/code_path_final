@@ -1,11 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Avatar } from "@nextui-org/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Button } from "@nextui-org/react";
+import BlogCard from "../components/BlogCard";
+import BlogForm from "../components/BlogForm";
+import { Button, useDisclosure } from "@nextui-org/react";
+import blogAPI from "../api/blogAPI.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Location() {
-  const { id } = useParams();
+  const { location_id } = useParams();
+  // handle obtaining users id
+  const user_id = 1;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getBlogData = async () => {
+      try {
+        const blogData = await blogAPI.getBlogsByLocation(location_id);
+        setBlogs(blogData);
+        console.log(blogData);
+      } catch {
+        setBlogs([]);
+        navigate("/");
+      }
+    };
+
+    getBlogData();
+  }, []);
+
+  const handleOpenCreateBlogModal = () => {
+    onOpen();
+  };
+
+  const textBlogs = [
+    {
+      imgURL:
+        "https://images.unsplash.com/photo-1620052800096-e2861f0e1e3d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      blogTitle: "My favorite beach place",
+    },
+    {
+      imgURL:
+        "https://images.unsplash.com/photo-1533621834623-d0b25d0b14e7?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHZhY2F0aW9ufGVufDB8fDB8fHww",
+      blogTitle: "Where I found the best places to eat ;)",
+    },
+    {
+      imgURL:
+        "https://plus.unsplash.com/premium_photo-1664281095927-d6247c417f08?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8",
+      blogTitle: "The Ice Cream Paradise",
+    },
+  ];
 
   return (
     <div>
@@ -20,7 +66,7 @@ export default function Location() {
           <div className="text-white font-thin text-4xl">
             {"Miami HardRock"}
           </div>
-          <hr class="my-1 w-1/6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+          <hr className="my-1 w-1/6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
           <div className="w-96 h-12 overflow-auto">
             <h3 className="text-md">
               {"701 First Avenue North, Minneapolis, United States"}
@@ -41,7 +87,7 @@ export default function Location() {
           className="w-full h-[500px] object-cover "
         />
       </div>
-      <div className="bg-gradient-to-tr from-cyan-900/25 to-blue-950/10 p-4">
+      <div className="bg-gradient-to-tr from-cyan-900/50 to-blue-950/10 p-4">
         <h1
           className="p-2 text-8xl font-thin"
           style={{ textShadow: "1px 2px 2px black" }}
@@ -67,12 +113,40 @@ export default function Location() {
           <Button
             size="lg"
             variant="bordered"
-            className="bg-gradient-to-tr from-cyan-200/50 to-blue-950/10 text-slate-50 border-cyan-100 font-thin text-2xl py-8 rounded-full"
+            className="  text-slate-50 border-cyan-100 font-thin text-2xl py-8 rounded-full"
+            onPress={() => handleOpenCreateBlogModal()}
           >
-            View Blogs
+            Create A Blog
           </Button>
         </div>
+        <div>
+          <h2 className="text-white text-6xl font-thin italic py-4">
+            {blogs.length > 0 ? "Recent Blog Posts" : "No Blogs Found"}
+            <hr
+              className={`text-white w-[420px] border-2 border-white mb-2`}
+            ></hr>
+          </h2>
+          <div className="grid grid-flow-col auto-cols-max overflow-x-scroll">
+            {blogs.map((blog, index) => (
+              <div key={index}>
+                <BlogCard blogTitle={blog.title} imgURL={[blog.images]} />
+              </div>
+            ))}
+            {/* {textBlogs.map((blog, index) => (
+              <div key={index}>
+                <BlogCard blogTitle={blog.blogTitle} imgURL={[blog.imgURL]} />
+              </div>
+            ))} */}
+          </div>
+        </div>
       </div>
+
+      <BlogForm
+        isOpen={isOpen}
+        onClose={onClose}
+        locationId={location_id}
+        userId={user_id}
+      />
     </div>
   );
 }

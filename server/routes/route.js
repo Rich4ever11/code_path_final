@@ -19,6 +19,7 @@ router.get("/location/:id", location.getLocationById);
 router.get("/blog", blog.getAllBlogs);
 router.post("/blog", blog.createBlog);
 router.get("/blog/:id", blog.getBlogById);
+router.get("/blog/location/:id", blog.getBlogByLocationId);
 
 router.get("/location_comment", comments.getAllLocationComments);
 router.post("/location_comment", comments.createLocationComment);

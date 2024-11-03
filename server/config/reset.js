@@ -40,6 +40,7 @@ export const createLocationTable = async () => {
           city VARCHAR(255) NOT NULL,  
           postal_code NUMERIC(100, 2) NOT NULL,
           country VARCHAR(255) NOT NULL,
+          images TEXT[] NOT NULL,
           longitude NUMERIC(100, 2) NOT NULL,
           latitude NUMERIC(100, 2) NOT NULL,
           created_at NUMERIC(100, 2) NOT NULL
@@ -63,10 +64,12 @@ export const createBlogTable = async () => {
             location_id INTEGER REFERENCES location (id) NOT NULL,
             user_id INTEGER REFERENCES users (id) NOT NULL,
             title VARCHAR(255) NOT NULL,
-            description VARCHAR(255) NOT NULL,
+            description TEXT NOT NULL,
             blog_content TEXT NOT NULL,
             images TEXT[] NOT NULL,
-            rating NUMERIC(100, 2) NOT NULL
+            rating NUMERIC(100, 2) NOT NULL,
+            likes NUMERIC(1000, 2) NOT NULL,
+            created_at NUMERIC(100, 2) NOT NULL
         )
     `;
 
@@ -163,10 +166,10 @@ export const createChatTable = async () => {
   }
 };
 
-await createUserTable();
-await createLocationTable();
+// await createUserTable();
+// await createLocationTable();
 await createBlogTable();
-await createLocationCommentsTable();
-await createBlogCommentsTable();
-await createConnectionTable();
-await createChatTable();
+// await createLocationCommentsTable();
+// await createBlogCommentsTable();
+// await createConnectionTable();
+// await createChatTable();

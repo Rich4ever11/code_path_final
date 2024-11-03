@@ -18,7 +18,7 @@ const App = () => {
       element: <Locations title="List of Locations" />,
     },
     {
-      path: "/location/:id",
+      path: "/location/:location_id",
       element: <Location title="Location Page" />,
     },
     {
