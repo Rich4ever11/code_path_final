@@ -12,11 +12,13 @@ import {
 import { Input, Textarea } from "@nextui-org/react";
 import { CiSearch } from "react-icons/ci";
 import locationAPI from "../api/locationAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function Location() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [locations, setLocations] = useState([]);
+  const navigate = useNavigate();
 
+  const [locations, setLocations] = useState([]);
   const [locationName, setLocationName] = useState();
   const [locationDescription, setLocationDescription] = useState();
   const [locationStreetName, setLocationStreetName] = useState();
@@ -114,7 +116,10 @@ export default function Location() {
                 </h4>
               </CardHeader>
               <div className="absolute z-10 bottom-1 right-1 flex-col !items-start">
-                <Button className="bg-gradient-to-tr from-orange-200/100 to-blue-950/5 border-2 border-white text-white shadow-lg font-normal my-4">
+                <Button
+                  className="bg-gradient-to-tr from-orange-200/100 to-blue-950/5 border-2 border-white text-white shadow-lg font-normal my-4"
+                  onClick={() => navigate(`/location/${location.id}`)}
+                >
                   View Location Details
                 </Button>
               </div>
@@ -148,7 +153,7 @@ export default function Location() {
             removeWrapper
             alt="Card background"
             className="z-0 w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1618946478890-a70e1faa63df?q=80&w=2669&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1730484976453-c6657e01df5c?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         </Card>{" "}
       </div>
@@ -157,14 +162,14 @@ export default function Location() {
         backdrop={"blur"}
         isOpen={isOpen}
         onClose={onClose}
-        className="bg-stone-950"
+        className="bg-stone-950/85"
       >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-white text-4xl font-thin">
                 <h1>Upload Location</h1>
-                <hr style={{ color: "gray" }} className="w-36 p-2"></hr>
+                <hr style={{ color: "gray" }} className="w-2/3 p-2"></hr>
                 <p className="text-lg text-slate-100">
                   Fill in all the available information you have about your
                   location and we will add it so users can blog about it and
@@ -177,7 +182,7 @@ export default function Location() {
               <ModalBody>
                 <div>
                   <Input
-                    className="text-white bg-black"
+                    className="text-white"
                     size={"lg"}
                     label="Location Name"
                     variant="bordered"
@@ -186,7 +191,7 @@ export default function Location() {
                 </div>
                 <div>
                   <Input
-                    className="text-white bg-black"
+                    className="text-white"
                     size={"lg"}
                     label="Street Name"
                     variant="bordered"
@@ -197,7 +202,7 @@ export default function Location() {
                 </div>
                 <div>
                   <Input
-                    className="text-white bg-black"
+                    className="text-white "
                     size={"lg"}
                     label="City"
                     variant="bordered"
@@ -206,7 +211,7 @@ export default function Location() {
                 </div>
                 <div>
                   <Input
-                    className="text-white bg-black"
+                    className="text-white "
                     size={"lg"}
                     label="Postal Code"
                     variant="bordered"
@@ -217,7 +222,7 @@ export default function Location() {
                 </div>
                 <div>
                   <Input
-                    className="text-white bg-black"
+                    className="text-white "
                     size={"lg"}
                     label="Country"
                     variant="bordered"
@@ -230,7 +235,7 @@ export default function Location() {
                     placeholder="Enter your description"
                     size={"lg"}
                     variant="bordered"
-                    className="text-white bg-black"
+                    className="text-white "
                     onChange={(event) =>
                       setLocationDescription(event.target.value)
                     }
@@ -239,7 +244,7 @@ export default function Location() {
                 <div className="flex">
                   <Input
                     type="number"
-                    className="text-white bg-black"
+                    className="text-white "
                     size={"lg"}
                     label="Latitude"
                     min={"-2000000"}
@@ -250,7 +255,7 @@ export default function Location() {
                   />
                   <Input
                     type="number"
-                    className="text-white bg-black"
+                    className="text-white "
                     size={"lg"}
                     label="Longitude"
                     variant="bordered"
