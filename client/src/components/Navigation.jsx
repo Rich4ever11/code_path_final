@@ -37,57 +37,57 @@ export default function Navigation() {
         </Button>
       </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-2">
         <NavbarItem>
-          <Button variant="light">
+          <Button variant="light" className="p-0 border-white border-2">
             <Link
               color="foreground"
               href="/chat"
-              className="text-xl border-orange-50 p-2 rounded-lg shadow-slate-400"
+              className="text-xl border-orange-50 rounded-full shadow-slate-400"
             >
               CHAT
             </Link>
           </Button>
         </NavbarItem>
-        <Button variant="light">
+        <Button variant="light" className="p-2 border-white border-2">
           <NavbarItem isActive>
             <Link
               href="/location"
               aria-current="page"
-              className="text-xl font-normal border-orange-50 p-2 rounded-lg shadow-slate-400 text-white "
+              className="text-xl font-normal border-orange-50 rounded-full shadow-slate-400 text-white "
             >
               LOCATIONS
             </Link>
           </NavbarItem>
         </Button>
-        <Button variant="light">
+        <Button variant="light" className="p-2 border-white border-2">
           <NavbarItem>
             <Link
               color="foreground"
               href="#"
-              className="text-xl border-orange-50 p-2 rounded-lg  shadow-slate-400 "
+              className="text-xl border-orange-50  rounded-lg  shadow-slate-400 "
             >
               BLOGS
             </Link>
           </NavbarItem>
         </Button>
-        <Button variant="light">
+        <Button variant="light" className="p-2 border-white border-2">
           <NavbarItem>
             <Link
               color="foreground"
               href="#"
-              className="text-xl border-orange-50 p-2 rounded-lg  shadow-slate-400 "
+              className="text-xl border-orange-50  rounded-lg  shadow-slate-400 "
             >
               RESOURCES
             </Link>
           </NavbarItem>
         </Button>
-        <Button variant="light">
+        <Button variant="light" className="p-2 border-white border-2">
           <NavbarItem>
             <Link
               color="foreground"
               href="#"
-              className="text-xl border-orange-50 p-2 rounded-lg shadow-slate-400 "
+              className="text-xl border-orange-50   rounded-lg shadow-slate-400 "
             >
               ABOUT
             </Link>

@@ -8,6 +8,16 @@ const getAllLocations = async () => {
   }
 };
 
+const getLocationById = async (location_id) => {
+  try {
+    const response = await fetch(`/api/location/${location_id}`);
+    const locationData = await response.json();
+    return locationData.data;
+  } catch {
+    return [];
+  }
+};
+
 const createLocation = async (requestBody) => {
   try {
     const response = await fetch("/api/location", {
@@ -26,4 +36,5 @@ const createLocation = async (requestBody) => {
 export default {
   getAllLocations,
   createLocation,
+  getLocationById,
 };

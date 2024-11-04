@@ -8,6 +8,16 @@ const getAllBlogs = async () => {
   }
 };
 
+const getBlogsById = async (blog_id) => {
+  try {
+    const response = await fetch(`/api/blog/${blog_id}`);
+    const blogData = await response.json();
+    return blogData.data;
+  } catch {
+    return [];
+  }
+};
+
 const getBlogsByLocation = async (location_id) => {
   try {
     const response = await fetch(`/api/blog/location/${location_id}`);
@@ -37,4 +47,5 @@ export default {
   getAllBlogs,
   createBlog,
   getBlogsByLocation,
+  getBlogsById,
 };

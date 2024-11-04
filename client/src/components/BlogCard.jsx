@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
-function BlogCard({ imgURL, blogTitle }) {
+function BlogCard({ imgURL, blogTitle, blogId }) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Card
@@ -21,6 +24,7 @@ function BlogCard({ imgURL, blogTitle }) {
             color="default"
             radius="lg"
             size="sm"
+            onClick={() => navigate(`/blog/${blogId}`)}
           >
             View Blog
           </Button>

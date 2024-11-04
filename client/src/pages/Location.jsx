@@ -7,24 +7,26 @@ import BlogForm from "../components/BlogForm";
 import { Button, useDisclosure } from "@nextui-org/react";
 import blogAPI from "../api/blogAPI.js";
 import { useNavigate } from "react-router-dom";
+import locationAPI from "../api/locationAPI.js";
 
 export default function Location() {
   const { location_id } = useParams();
   // handle obtaining users id
   const user_id = 1;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [location, setLocation] = useState({});
   const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getBlogData = async () => {
       try {
         const blogData = await blogAPI.getBlogsByLocation(location_id);
+        const locationData = await locationAPI.getLocationById(location_id);
         setBlogs(blogData);
-        console.log(blogData);
-      } catch {
+        setLocation(locationData[0]);
+      } catch (error) {
+        console.log(error);
         setBlogs([]);
-        navigate("/");
       }
     };
 
@@ -64,12 +66,13 @@ export default function Location() {
         </div>
         <div className="grid-flow-col px-4 py-1 w-full">
           <div className="text-white font-thin text-4xl">
-            {"Miami HardRock"}
+            {location.name || "None"}
           </div>
           <hr className="my-1 w-1/6 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
           <div className="w-96 h-12 overflow-auto">
             <h3 className="text-md">
-              {"701 First Avenue North, Minneapolis, United States"}
+              {location.street_name || "None"}, {location.city || "None"},{" "}
+              {location.country || "None"} {location.postal_code || "None"}
             </h3>
             <h3 className="text-md">{" Sunday, November 3, 2024 "}</h3>
           </div>
@@ -92,13 +95,11 @@ export default function Location() {
           className="p-2 text-8xl font-thin"
           style={{ textShadow: "1px 2px 2px black" }}
         >
-          {"Miami HardRock"}
+          {location.name || "None"}
         </h1>
 
         <p className="p-2 text-lg text-slate-300">
-          {
-            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum feugiat auctor ullamcorper. Aenean lorem neque, fringilla pulvinar massa a, accumsan aliquam diam. Sed tincidunt id enim eget tempor. Suspendisse condimentum nec lectus sit amet tincidunt. Donec fringilla arcu non ipsum ultrices sodales id sed turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean aliquam massa tincidunt malesuada aliquet. Praesent dignissim et velit vel molestie. Duis consequat eleifend nulla, et tempus ex mollis suscipit. Fusce accumsan dui elit, ac pharetra risus pulvinar sed. Aliquam semper nisi in risus maximus tempor. Sed justo neque, consectetur ac fermentum non, porta non elit. Fusce eu eros a mauris volutpat ornare et eu ex. Donec vel lacus bibendum, semper orci non, venenatis nisl. Cras scelerisque elementum orci ac pellentesque. "
-          }
+          {location.description || "None"}
         </p>
 
         <div className="flex flex-row-reverse p-2 py-6">
@@ -129,7 +130,11 @@ export default function Location() {
           <div className="grid grid-flow-col auto-cols-max overflow-x-scroll">
             {blogs.map((blog, index) => (
               <div key={index}>
-                <BlogCard blogTitle={blog.title} imgURL={[blog.images]} />
+                <BlogCard
+                  blogTitle={blog.title}
+                  imgURL={[blog.images]}
+                  blogId={blog.id}
+                />
               </div>
             ))}
             {/* {textBlogs.map((blog, index) => (

@@ -59,7 +59,7 @@ const createBlog = async (request, response) => {
 };
 
 const getBlogById = async (request, response) => {
-  const blogId = request.params.id;
+  const id = request.params.id;
 
   const getBlogByIdQuery = `
     SELECT *
@@ -69,7 +69,7 @@ const getBlogById = async (request, response) => {
     `;
 
   try {
-    const result = await pool.query(getBlogByIdQuery, [blogId]);
+    const result = await pool.query(getBlogByIdQuery, [id]);
     console.log("🎉 blog data obtained");
     response.status(200).json({ data: result.rows });
   } catch (error) {

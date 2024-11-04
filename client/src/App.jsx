@@ -5,6 +5,7 @@ import Chat from "./pages/Chat.jsx";
 import Location from "./pages/Location.jsx";
 import Locations from "./pages/Locations.jsx";
 import Navigation from "./components/Navigation.jsx";
+import Blog from "./pages/Blog.jsx";
 import "./App.css";
 
 const App = () => {
@@ -20,6 +21,10 @@ const App = () => {
     {
       path: "/location/:location_id",
       element: <Location title="Location Page" />,
+    },
+    {
+      path: "/blog/:blog_id",
+      element: <Blog title="Blog Page" />,
     },
     {
       path: "/chat",
