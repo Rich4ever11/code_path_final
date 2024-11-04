@@ -4,10 +4,14 @@ import { Avatar } from "@nextui-org/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import BlogCard from "../components/BlogCard";
 import BlogForm from "../components/BlogForm";
-import { Button, useDisclosure } from "@nextui-org/react";
+import { Textarea, Button, useDisclosure } from "@nextui-org/react";
 import blogAPI from "../api/blogAPI.js";
 import { useNavigate } from "react-router-dom";
 import locationAPI from "../api/locationAPI.js";
+import Comments from "../components/Comments.jsx";
+import { testBlogs } from "../data/dummyData.js";
+import { testComments } from "../data/dummyData.js";
+import commentsAPI from "../api/comments.js";
 
 export default function Location() {
   const { location_id } = useParams();
@@ -16,10 +20,12 @@ export default function Location() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [location, setLocation] = useState({});
   const [blogs, setBlogs] = useState([]);
+  const [locationComments, SetLocationComments] = useState([]);
 
   useEffect(() => {
     const getBlogData = async () => {
       try {
+        //This can be its own join query
         const blogData = await blogAPI.getBlogsByLocation(location_id);
         const locationData = await locationAPI.getLocationById(location_id);
         setBlogs(blogData);
@@ -36,24 +42,6 @@ export default function Location() {
   const handleOpenCreateBlogModal = () => {
     onOpen();
   };
-
-  const textBlogs = [
-    {
-      imgURL:
-        "https://images.unsplash.com/photo-1620052800096-e2861f0e1e3d?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      blogTitle: "My favorite beach place",
-    },
-    {
-      imgURL:
-        "https://images.unsplash.com/photo-1533621834623-d0b25d0b14e7?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHZhY2F0aW9ufGVufDB8fDB8fHww",
-      blogTitle: "Where I found the best places to eat ;)",
-    },
-    {
-      imgURL:
-        "https://plus.unsplash.com/premium_photo-1664281095927-d6247c417f08?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8",
-      blogTitle: "The Ice Cream Paradise",
-    },
-  ];
 
   return (
     <div>
@@ -120,12 +108,9 @@ export default function Location() {
             Create A Blog
           </Button>
         </div>
-        <div>
-          <h2 className="text-white text-6xl font-thin italic py-4">
-            {blogs.length > 0 ? "Recent Blog Posts" : "No Blogs Found"}
-            <hr
-              className={`text-white w-[420px] border-2 border-white mb-2`}
-            ></hr>
+        <div className="shadow-md shadow-black border-2 border-cyan-50/5 rounded-lg w-full">
+          <h2 className="text-white text-6xl font-thin italic py-4 underline">
+            {blogs.length + 1 > 0 ? "Recent Blog Posts" : "No Blogs Found"}
           </h2>
           <div className="grid grid-flow-col auto-cols-max overflow-x-scroll">
             {blogs.map((blog, index) => (
@@ -137,13 +122,20 @@ export default function Location() {
                 />
               </div>
             ))}
-            {/* {textBlogs.map((blog, index) => (
+
+            {testBlogs.map((blog, index) => (
               <div key={index}>
                 <BlogCard blogTitle={blog.blogTitle} imgURL={[blog.imgURL]} />
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
+
+        <Comments
+          commentsList={testComments}
+          id={location_id}
+          commentType={"location"}
+        />
       </div>
 
       <BlogForm

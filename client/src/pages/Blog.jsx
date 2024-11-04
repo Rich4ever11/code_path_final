@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import blogAPI from "../api/blogAPI.js";
 import BlogCard from "../components/BlogCard";
 import { useParams } from "react-router-dom";
+import Comments from "../components/Comments.jsx";
+import { testComments } from "../data/dummyData.js";
 
 export default function Blog() {
   const { blog_id } = useParams();
@@ -102,11 +104,8 @@ export default function Blog() {
         aria-label="Related articles"
         class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800"
       >
-        <h2 className="text-white text-6xl font-thin italic py-4">
+        <h2 className="text-white text-6xl font-thin italic py-4 underline">
           {recentBlogs.length > 0 ? "Recent Blog Posts" : "No Blogs Found"}
-          <hr
-            className={`text-white w-[420px] border-2 border-white mb-2`}
-          ></hr>
         </h2>
         <div className="grid grid-flow-col auto-cols-max overflow-x-scroll">
           {recentBlogs &&
@@ -119,6 +118,9 @@ export default function Blog() {
                 />
               </div>
             ))}
+        </div>
+        <div className="m-20">
+          <Comments commentsList={testComments} commentType={"blog"} />
         </div>
       </aside>
     </div>

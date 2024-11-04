@@ -26,7 +26,7 @@ const createLocationComment = async (request, response) => {
   const likes = 0;
 
   const createBlogQuery = `
-      INSERT INTO location_comment (user_id, location_id, comment, likes, created_at, updated_at) VALUES ($1, $2, $3, $4, $5) RETURNING *
+      INSERT INTO location_comment (user_id, location_id, comment, likes, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
     `;
   const createBlogParams = [
     user_id,
@@ -51,7 +51,7 @@ const updateLocationComment = async (request, response) => {
   const { comment_id, user_id, location_id, comment } = request.body;
   const updated_at = getTimeInSeconds();
 
-  const updateLocationCommentByIdQuery = `UPDATE location_comment SET comment = $1, updated_at = $2 WHERE id = $4 AND user_id = $5 AND location_id = $6;`;
+  const updateLocationCommentByIdQuery = `UPDATE location_comment SET comment = $1, updated_at = $2 WHERE id = $3 AND user_id = $4 AND location_id = $5;`;
   const updateLocationCommentByIdParams = [
     comment,
     updated_at,
@@ -144,7 +144,7 @@ const updateBlogComment = async (request, response) => {
   const { comment_id, user_id, blog_id, comment } = request.body;
   const updated_at = getTimeInSeconds();
 
-  const updateBlogCommentByIdQuery = `UPDATE blog_comment SET comment = $1, updated_at = $2 WHERE id = $4 AND user_id = $5 AND blog_id = $6;`;
+  const updateBlogCommentByIdQuery = `UPDATE blog_comment SET comment = $1, updated_at = $2 WHERE id = $3 AND user_id = $4 AND blog_id = $5;`;
   const updateBlogCommentByIdParams = [
     comment,
     updated_at,

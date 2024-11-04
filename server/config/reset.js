@@ -91,6 +91,7 @@ export const createLocationCommentsTable = async () => {
             user_id INTEGER REFERENCES users (id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             updated_at NUMERIC(100, 2) NOT NULL,
+            likes NUMERIC(1000, 2) NOT NULL,
             comment TEXT NOT NULL
         )
     `;
@@ -113,6 +114,7 @@ export const createBlogCommentsTable = async () => {
             user_id INTEGER REFERENCES users(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             updated_at NUMERIC(100, 2) NOT NULL,
+            likes NUMERIC(1000, 2) NOT NULL,
             comment TEXT NOT NULL
         )
     `;

@@ -38,7 +38,7 @@ export default function Location() {
 
   return (
     <div className="h-screen px-10 bg-no-repeat bg-cover bg-center bg-fixed bg-[url('https://images.unsplash.com/photo-1444210971048-6130cf0c46cf?q=80&w=2673&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
-      <div>
+      <div className="py-8">
         <h1
           className="text-8xl text-white font-thin"
           style={{ textShadow: "1px 5px 5px black" }}
