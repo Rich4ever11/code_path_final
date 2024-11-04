@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import blogAPI from "../api/blogAPI.js";
+import BlogCard from "../components/BlogCard";
 import { useParams } from "react-router-dom";
 
 export default function Blog() {
   const { blog_id } = useParams();
   const [blogData, setBlogData] = useState({});
+  const [recentBlogs, setRecentBlogs] = useState([]);
   const [paragraphs, setParagraphs] = useState([]);
   const [images, setImages] = useState([]);
+  const [locationID, setLocationID] = useState("");
 
   useEffect(() => {
     const renderLocationData = async () => {
+      // this could be implemented in the backend as a join obtaining data such as user info, blog data and location data
       const blog = await blogAPI.getBlogsById(blog_id);
       if (blog.length > 0) {
         setBlogData(blog[0]);
@@ -19,6 +23,14 @@ export default function Blog() {
         const blogImages = blog[0].images;
         setParagraphs(blogText);
         setImages(blogImages);
+
+        const location_id = blog[0].location_id;
+        const recentBlogData = await blogAPI.getBlogsByLocation(location_id);
+        const recentBlogsFiltered = recentBlogData.filter(
+          (blog) => blog.id != blog_id
+        );
+        console.log(recentBlogsFiltered);
+        setRecentBlogs(recentBlogsFiltered);
       } else {
       }
     };
@@ -61,7 +73,7 @@ export default function Blog() {
                   </div>
                 </div>
               </address>
-              <h1 class="mb-4 text-6xl font-thin leading-tight text-gray-900 lg:mb-6 lg:text-7xl dark:text-white">
+              <h1 class="mb-4 text-6xl font-thin leading-tight text-gray-900 lg:mb-6 lg:text-7xl dark:text-white underline">
                 {blogData.title}
               </h1>
             </header>
@@ -90,10 +102,23 @@ export default function Blog() {
         aria-label="Related articles"
         class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800"
       >
-        <div class="px-4 mx-auto max-w-screen-xl">
-          <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">
-            Related articles
-          </h2>
+        <h2 className="text-white text-6xl font-thin italic py-4">
+          {recentBlogs.length > 0 ? "Recent Blog Posts" : "No Blogs Found"}
+          <hr
+            className={`text-white w-[420px] border-2 border-white mb-2`}
+          ></hr>
+        </h2>
+        <div className="grid grid-flow-col auto-cols-max overflow-x-scroll">
+          {recentBlogs &&
+            recentBlogs.map((blog, index) => (
+              <div key={index}>
+                <BlogCard
+                  blogTitle={blog.title}
+                  imgURL={[blog.images]}
+                  blogId={blog.id}
+                />
+              </div>
+            ))}
         </div>
       </aside>
     </div>
