@@ -10,27 +10,25 @@ import LocationForm from "../components/LocationForm";
 export default function Location() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const [locationSearch, setLocationSearch] = useState([]);
   const [locations, setLocations] = useState([]);
-
-  const exampleLocationData = {
-    name: "First Avenue",
-    description:
-      "Housed in an old depot, this rock venue & tiny side bar have hosted & launched many acts since 1970.",
-    street_name: "701 First Avenue North",
-    city: "	Minneapolis",
-    postal_code: "55403",
-    country: "United States",
-    longitude: 44.978,
-    latitude: -93.27594,
-  };
 
   useEffect(() => {
     const renderLocationData = async () => {
       const locations = await locationAPI.getAllLocations();
       setLocations(locations);
+      setLocationSearch(locations);
     };
     renderLocationData();
   }, []);
+
+  const handleLocationSearch = (searchQuery) => {
+    const locationSearch = locations;
+    const filteredLocations = locationSearch.filter((location) =>
+      location.name.includes(searchQuery)
+    );
+    setLocationSearch(filteredLocations);
+  };
 
   const handleOpen = () => {
     onOpen();
@@ -50,6 +48,7 @@ export default function Location() {
         <Input
           type="search"
           size={"lg"}
+          onChange={(event) => handleLocationSearch(event.target.value)}
           startContent={<CiSearch size={32} />}
         />
         <div className="px-2">
@@ -63,7 +62,7 @@ export default function Location() {
         </div>
       </div>
       <div className="max-w-full gap-2 grid grid-cols-12 grid-rows-2 px-8">
-        {locations.map((location) => (
+        {locationSearch.map((location) => (
           <>
             <Card className="col-span-12 sm:col-span-4 h-[300px]">
               <CardHeader className="absolute z-10 top-1 flex-col !items-start">
@@ -90,12 +89,12 @@ export default function Location() {
                 removeWrapper
                 alt="Card background"
                 className="z-0 w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1618946478890-a70e1faa63df?q=80&w=2669&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={location.images}
               />
             </Card>{" "}
           </>
         ))}
-        <Card className="col-span-12 sm:col-span-4 h-[300px]">
+        {/* <Card className="col-span-12 sm:col-span-4 h-[300px]">
           <CardHeader className="absolute z-10 top-1 flex-col !items-start">
             <p className="text-2xl text-white/80 uppercase font-thin">
               Suite 244 96908 Macejkovic Expressway, Evieton, WY 28488-8750
@@ -121,7 +120,7 @@ export default function Location() {
             className="z-0 w-full h-full object-cover"
             src="https://images.unsplash.com/photo-1730484976453-c6657e01df5c?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
-        </Card>{" "}
+        </Card>{" "} */}
       </div>
 
       <LocationForm isOpen={isOpen} onClose={onClose} />

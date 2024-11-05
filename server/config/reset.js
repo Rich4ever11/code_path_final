@@ -40,7 +40,7 @@ export const createLocationTable = async () => {
           city VARCHAR(255) NOT NULL,  
           postal_code NUMERIC(100, 2) NOT NULL,
           country VARCHAR(255) NOT NULL,
-          images TEXT[] NOT NULL,
+          image TEXT NOT NULL,
           longitude NUMERIC(100, 2) NOT NULL,
           latitude NUMERIC(100, 2) NOT NULL,
           created_at NUMERIC(100, 2) NOT NULL

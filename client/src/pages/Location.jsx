@@ -73,7 +73,7 @@ export default function Location() {
       </div>
       <div className="">
         <img
-          src="https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,q_75,w_1200/v1/crm/ftlauderdale/Property-Image-GH-prespective-Day-hi-res-2-2020pl_7670E52D-D424-46F0-BD7F0EED531C6600_3194cdc4-98cd-458e-a48e3a2b985a12fa.jpg"
+          src={location.images}
           alt=""
           className="w-full h-[500px] object-cover "
         />

@@ -9,6 +9,7 @@ import {
   Input,
   Textarea,
 } from "@nextui-org/react";
+import locationAPI from "../api/locationAPI.js";
 
 export default function LocationForm({ isOpen, onClose }) {
   const [locationName, setLocationName] = useState();
@@ -19,6 +20,7 @@ export default function LocationForm({ isOpen, onClose }) {
   const [locationCountry, setLocationCountry] = useState();
   const [locationLongitude, setLocationLongitude] = useState();
   const [locationLatitude, setLocationLatitude] = useState();
+  const [locationImage, setLocationImage] = useState();
 
   const handleLocationCreation = async () => {
     try {
@@ -32,10 +34,12 @@ export default function LocationForm({ isOpen, onClose }) {
         country: locationCountry,
         longitude: locationLongitude,
         latitude: locationLatitude,
+        image: locationImage,
       };
       console.log(locationData);
       const result = await locationAPI.createLocation(locationData);
       console.log("Location Creation Accomplished");
+      onClose();
     } catch (error) {
       console.log("Location Creation Failed: ", error);
     }
@@ -72,6 +76,15 @@ export default function LocationForm({ isOpen, onClose }) {
                     label="Location Name"
                     variant="bordered"
                     onChange={(event) => setLocationName(event.target.value)}
+                  />
+                </div>
+                <div>
+                  <Input
+                    className="text-white"
+                    size={"lg"}
+                    label="Location Image URL"
+                    variant="bordered"
+                    onChange={(event) => setLocationImage(event.target.value)}
                   />
                 </div>
                 <div>

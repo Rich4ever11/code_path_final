@@ -2,6 +2,7 @@ import "../config/dotenv.js";
 import { pool } from "../config/database.js";
 import { getTimeInSeconds } from "../util/timelib.js";
 
+// route successfully tested
 const getAllLocations = async (request, response) => {
   const getLocationsQuery = `
     SELECT *
@@ -31,11 +32,12 @@ const createLocation = async (request, response) => {
     country,
     longitude,
     latitude,
+    image,
   } = request.body;
   const created_at = getTimeInSeconds();
 
   const createLocationQuery = `
-      INSERT INTO location (user_id, name, description, street_name, city, postal_code, country, longitude, latitude, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *
+      INSERT INTO location (user_id, name, description, street_name, city, postal_code, country, longitude, latitude, images, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *
     `;
 
   const createLocationParams = [
@@ -48,6 +50,7 @@ const createLocation = async (request, response) => {
     country,
     longitude,
     latitude,
+    image,
     created_at,
   ];
 
@@ -61,6 +64,7 @@ const createLocation = async (request, response) => {
   }
 };
 
+// route successfully tested
 const getLocationById = async (request, response) => {
   const locationId = request.params.id;
 
