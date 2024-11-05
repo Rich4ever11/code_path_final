@@ -19,6 +19,28 @@ const getAllLocationComments = async (request, response) => {
   }
 };
 
+const getAllLocationCommentsByLocationId = async (request, response) => {
+  const locationId = request.params.location_id;
+
+  const getLocationCommentsByLocationId = `
+    SELECT *
+    FROM location_comment
+    WHERE location_id = $1
+    ORDER BY location_id ASC
+    `;
+
+  try {
+    const result = await pool.query(getLocationCommentsByLocationId, [
+      locationId,
+    ]);
+    console.log("🎉 location comment data found");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing location comment data: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 const createLocationComment = async (request, response) => {
   const { user_id, location_id, comment } = request.body;
   const created_at = getTimeInSeconds();
@@ -187,6 +209,7 @@ const deleteBlogComment = async (request, response) => {
 
 export default {
   getAllLocationComments,
+  getAllLocationCommentsByLocationId,
   createLocationComment,
   updateLocationComment,
   deleteLocationComment,

@@ -22,6 +22,10 @@ router.get("/blog/:id", blog.getBlogById);
 router.get("/blog/location/:id", blog.getBlogByLocationId);
 
 router.get("/location_comment", comments.getAllLocationComments);
+router.get(
+  "/location_comment/:location_id",
+  comments.getAllLocationCommentsByLocationId
+);
 router.post("/location_comment", comments.createLocationComment);
 router.put("/location_comment", comments.updateLocationComment);
 router.delete("/location_comment", comments.deleteLocationComment);

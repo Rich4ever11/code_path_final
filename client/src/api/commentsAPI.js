@@ -1,13 +1,3 @@
-const getAllLocationComments = async () => {
-  try {
-    const response = await fetch("/api/location_comment");
-    const locationData = await response.json();
-    return locationData.data;
-  } catch {
-    return [];
-  }
-};
-
 const createLocationComment = async (requestBody) => {
   try {
     const response = await fetch("/api/location_comment", {
@@ -23,7 +13,17 @@ const createLocationComment = async (requestBody) => {
   }
 };
 
+const getCommentByLocationId = async (location_id) => {
+  try {
+    const response = await fetch(`/api/location_comment/${location_id}`);
+    const locationComments = await response.json();
+    return locationComments.data;
+  } catch {
+    return { result: "error" };
+  }
+};
+
 export default {
-  getAllLocationComments,
   createLocationComment,
+  getCommentByLocationId,
 };

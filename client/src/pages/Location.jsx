@@ -11,7 +11,7 @@ import locationAPI from "../api/locationAPI.js";
 import Comments from "../components/Comments.jsx";
 import { testBlogs } from "../data/dummyData.js";
 import { testComments } from "../data/dummyData.js";
-import commentsAPI from "../api/comments.js";
+import commentsAPI from "../api/commentsAPI.js";
 
 export default function Location() {
   const { location_id } = useParams();
@@ -28,8 +28,12 @@ export default function Location() {
         //This can be its own join query
         const blogData = await blogAPI.getBlogsByLocation(location_id);
         const locationData = await locationAPI.getLocationById(location_id);
+        const commentsData = await commentsAPI.getCommentByLocationId(
+          location_id
+        );
         setBlogs(blogData);
         setLocation(locationData[0]);
+        SetLocationComments(commentsData);
       } catch (error) {
         console.log(error);
         setBlogs([]);
@@ -132,7 +136,7 @@ export default function Location() {
         </div>
 
         <Comments
-          commentsList={testComments}
+          commentsList={locationComments}
           id={location_id}
           commentType={"location"}
         />

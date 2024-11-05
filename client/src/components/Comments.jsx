@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Textarea, Button, Avatar } from "@nextui-org/react";
-import commentsAPI from "../api/comments.js";
+import commentsAPI from "../api/commentsAPI.js";
 
 export default function Comments({ commentsList, id, commentType }) {
   const user_id = 1;
@@ -16,6 +16,7 @@ export default function Comments({ commentsList, id, commentType }) {
       };
       console.log(requestBody);
       const response = await commentsAPI.createLocationComment(requestBody);
+      setComment("");
     } else if (commentType === "blog") {
       const requestBody = {
         user_id: user_id,
