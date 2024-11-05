@@ -45,6 +45,10 @@ Users will be able to search other users on the web application through either t
 ### Search Locations
 ![ezgif-4-b53f6b90a0](https://github.com/user-attachments/assets/bb3807a7-b123-48f2-affb-ff8a01135192)
 
+### Location Creation 
+![ezgif-2-20612010c1](https://github.com/user-attachments/assets/6d8d1a05-83fc-4ac2-bef9-c316baac1174)
+
+
 ### Send Location -> Accept/Reject -> Communication Channel Opened
 
 Once two users are interested both users can send exactly one location that they would like to meet and interact at. This can be from our database of locations or a location not yet added. From there if the other user accepts the location a communication channel is initiated and both users can start communicating and setting up a date to meet up.
@@ -53,6 +57,10 @@ Once two users are interested both users can send exactly one location that they
 ### Comment On, Rate and Open Forum Discuss Locations They Have Visited With Other Users
 
 Allow a user to make comments on a location, reply to comments on a location and give a rating 1/5 on a location. Also allow for a user to verify that they visited a location and upon verification an indication is added to the users comment or profile
+
+### Comment Creation And Render
+![ezgif-2-1d7d45984e](https://github.com/user-attachments/assets/88d691da-7838-403f-8665-131dd6cb28fc)
+
 
 ### Add Location For Romantic Time or Group/FriendShip Building
 
