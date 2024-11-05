@@ -33,7 +33,7 @@ AWS S3 (USER IMAGES/FILES)
 
 ## Features
 
-### User Profile Creation
+### User Profile Creation/Authentication
 
 Users will be given the ability to create a profile and login with said created profile. The data a user can add and store includes 3 to 5 pictures of the user, credentials used for authentication, what interests they have, physical attributes, hobbies and much more.
 
@@ -42,6 +42,8 @@ Users will be given the ability to create a profile and login with said created 
 
 Users will be able to search other users on the web application through either the use of swiping (left for interested or right for interested). Right swiped users will be added to the list of users you can search through. Also you can add locations or view locations users have visited. And from there you can see user reviews of that location, how it went and tag other users that you went with
 
+### Search Locations
+![ezgif-4-b53f6b90a0](https://github.com/user-attachments/assets/bb3807a7-b123-48f2-affb-ff8a01135192)
 
 ### Send Location -> Accept/Reject -> Communication Channel Opened
 
@@ -55,6 +57,9 @@ Allow a user to make comments on a location, reply to comments on a location and
 ### Add Location For Romantic Time or Group/FriendShip Building
 
 Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
+
+### Locations Creation
+![ezgif-4-872738fc3f](https://github.com/user-attachments/assets/53047f16-e858-4992-ac30-6f4c87a0291c)
 
 ### Location Blog Creation, Editing, Deletion
 Bloggers can easily create, update, and delete their location blog posts. Bloggers have complete control over their content, allowing them to share, modify, or remove their posts as needed.
