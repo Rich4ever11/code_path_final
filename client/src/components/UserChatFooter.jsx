@@ -10,7 +10,7 @@ export default function UserChatFooter() {
   ];
 
   return (
-    <div className="h-screen bg-black/75">
+    <div className="h-screen bg-black/10 w-full">
       <div className="flex p-2 hover:bg-black transition duration-700 ease-in-out ">
         <div className="content-center">
           <div className="border-3 border-cyan-50 rounded-full p-1 shadow-md shadow-black">
