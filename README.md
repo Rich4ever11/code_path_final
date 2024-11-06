@@ -38,11 +38,11 @@ AWS S3 (USER IMAGES/FILES)
 Users will be given the ability to create a profile and login with said created profile. The data a user can add and store includes 3 to 5 pictures of the user, credentials used for authentication, what interests they have, physical attributes, hobbies and much more.
 
 
-### Search Other Users/Locations
+### ✅ Search Other Users/Locations
 
 Users will be able to search other users on the web application through either the use of swiping (left for interested or right for interested). Right swiped users will be added to the list of users you can search through. Also you can add locations or view locations users have visited. And from there you can see user reviews of that location, how it went and tag other users that you went with
 
-### Search Locations
+### ✅ Search Locations
 ![ezgif-4-b53f6b90a0](https://github.com/user-attachments/assets/bb3807a7-b123-48f2-affb-ff8a01135192)
 
 ### Location Creation 
@@ -62,7 +62,7 @@ Allow a user to make comments on a location, reply to comments on a location and
 ![ezgif-2-1d7d45984e](https://github.com/user-attachments/assets/88d691da-7838-403f-8665-131dd6cb28fc)
 
 
-### Add Location For Romantic Time or Group/FriendShip Building
+### ✅ Add Location For Romantic Time or Group/FriendShip Building
 
 Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
 
