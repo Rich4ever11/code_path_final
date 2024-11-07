@@ -34,6 +34,7 @@ All tasking have been finished and great work has been completed for the week
 ### Which features and user stories would you consider “at risk”? How will you change your plan if those items remain “at risk”?
 
 I say the chat communication is at risk. I think communication can be implemented easily however the location aspect can get complex if we develope to many mini features and get too hyperfocused.
+
 ### 5. What additional support will you need in upcoming units as you continue to work on your final project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+We will need aditional time outside of class to complete all features and possibly information related to user login and profile management.
