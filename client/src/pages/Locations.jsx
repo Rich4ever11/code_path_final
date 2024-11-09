@@ -9,10 +9,10 @@ import LocationForm from "../components/LocationForm";
 
 export default function Location() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpenEdit, onOpenEdit, onCloseEdit } = useDisclosure();
   const navigate = useNavigate();
   const [locationSearch, setLocationSearch] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [locationModalID, setLocationModelID] = useState();
 
   useEffect(() => {
     const renderLocationData = async () => {
@@ -31,7 +31,13 @@ export default function Location() {
     setLocationSearch(filteredLocations);
   };
 
-  const handleCreateOpen = () => {
+  const handleCreateLocation = () => {
+    setLocationModelID(null);
+    onOpen();
+  };
+
+  const handleEditLocation = (location_id) => {
+    setLocationModelID(location_id);
     onOpen();
   };
 
@@ -56,7 +62,7 @@ export default function Location() {
           <Button
             size="lg"
             className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg font-normal"
-            onPress={() => handleCreateOpen()}
+            onPress={() => handleCreateLocation()}
           >
             Add Location
           </Button>
@@ -83,6 +89,7 @@ export default function Location() {
                 <Button
                   variant="ghost"
                   className="bg-gradient-to-tr from-pink-500/90 to-yellow-500/90 border-2 border-white text-white shadow-lg font-normal my-4"
+                  onClick={() => handleEditLocation(location.id)}
                 >
                   Edit Location
                 </Button>
@@ -100,11 +107,29 @@ export default function Location() {
                 src={location.images}
               />
             </Card>{" "}
+            {location.id === locationModalID && (
+              <LocationForm
+                isOpen={isOpen}
+                onClose={onClose}
+                location_id={location.id}
+                name={location.name}
+                description={location.description}
+                street_name={location.street_name}
+                city={location.city}
+                postal_code={location.postal_code}
+                country={location.country}
+                longitude={location.longitude}
+                latitude={location.latitude}
+                images={location.images}
+              />
+            )}
           </>
         ))}
       </div>
 
-      <LocationForm isOpen={isOpen} onClose={onClose} />
+      {locationModalID === null && (
+        <LocationForm isOpen={isOpen} onClose={onClose} />
+      )}
     </div>
   );
 }

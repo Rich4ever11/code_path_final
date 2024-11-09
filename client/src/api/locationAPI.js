@@ -33,8 +33,40 @@ const createLocation = async (requestBody) => {
   }
 };
 
+const updateLocation = async (requestBody) => {
+  try {
+    const response = await fetch("/api/location", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+    return { result: "success" };
+  } catch {
+    return { result: "error" };
+  }
+};
+
+const deleteLocation = async (requestBody) => {
+  try {
+    const response = await fetch("/api/location", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+    return { result: "success" };
+  } catch {
+    return { result: "error" };
+  }
+};
+
 export default {
   getAllLocations,
   createLocation,
   getLocationById,
+  updateLocation,
+  deleteLocation,
 };

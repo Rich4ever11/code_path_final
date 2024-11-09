@@ -4,13 +4,11 @@ import { Avatar } from "@nextui-org/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import BlogCard from "../components/BlogCard";
 import BlogForm from "../components/BlogForm";
-import { Textarea, Button, useDisclosure } from "@nextui-org/react";
+import { Button, useDisclosure } from "@nextui-org/react";
 import blogAPI from "../api/blogAPI.js";
-import { useNavigate } from "react-router-dom";
 import locationAPI from "../api/locationAPI.js";
 import Comments from "../components/Comments.jsx";
 import { testBlogs } from "../data/dummyData.js";
-import { testComments } from "../data/dummyData.js";
 import commentsAPI from "../api/commentsAPI.js";
 
 export default function Location() {

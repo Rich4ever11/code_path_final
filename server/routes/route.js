@@ -10,10 +10,13 @@ const router = express.Router();
 
 // define routes to get, create, edit, and delete items
 router.post("/user", user.createNewUser);
+router.post("/user/login", user.authenticateUser);
 router.get("/user/:id", user.getUserById);
 
 router.get("/location", location.getAllLocations);
 router.post("/location", location.createLocation);
+router.put("/location", location.updateLocation);
+router.delete("/location", location.deleteLocation);
 router.get("/location/:id", location.getLocationById);
 
 router.get("/blog", blog.getAllBlogs);

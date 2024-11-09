@@ -14,10 +14,17 @@ import {
 } from "@nextui-org/react";
 import { GiDualityMask } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
-import locationAPI from "../api/locationAPI";
+import { getAuth } from "firebase/auth";
+import { app } from "../util/firebaseConfig";
 
 export default function Navigation() {
   const navigate = useNavigate();
+  const auth = getAuth(app);
+
+  const handleUserLogOut = () => {
+    auth.signOut();
+    navigate("/");
+  };
 
   return (
     <Navbar
@@ -121,7 +128,11 @@ export default function Navigation() {
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
             <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="logout" color="danger">
+            <DropdownItem
+              key="logout"
+              color="danger"
+              onClick={() => handleUserLogOut()}
+            >
               Log Out
             </DropdownItem>
           </DropdownMenu>

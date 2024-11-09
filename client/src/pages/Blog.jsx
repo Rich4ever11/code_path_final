@@ -4,6 +4,7 @@ import BlogCard from "../components/BlogCard";
 import { useParams } from "react-router-dom";
 import Comments from "../components/Comments.jsx";
 import { testComments } from "../data/dummyData.js";
+import { Button } from "@nextui-org/react";
 
 export default function Blog() {
   const { blog_id } = useParams();
@@ -96,6 +97,10 @@ export default function Blog() {
                 <p class="lead py-2 font-thin text-2xl">{paragraph}</p>
               </div>
             ))}
+
+            <div className="py-4">
+              <Button className="">Edit Blog</Button>
+            </div>
           </article>
         </div>
       </main>

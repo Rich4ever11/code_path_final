@@ -60,7 +60,28 @@ const getUserById = async (request, response) => {
   }
 };
 
+const authenticateUser = async (request, response) => {
+  const { username, password } = request.body;
+  const authenticateUsersQuery = `
+      SELECT *
+      FROM users
+      WHERE username = $1 AND password = $2
+  `;
+
+  const userCredentials = [username, password];
+
+  try {
+    const result = await pool.query(authenticateUsersQuery, userCredentials);
+    console.log("🎉 user data obtained");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing user data: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   createNewUser,
+  authenticateUser,
   getUserById,
 };

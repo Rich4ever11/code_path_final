@@ -11,16 +11,35 @@ import {
 } from "@nextui-org/react";
 import locationAPI from "../api/locationAPI.js";
 
-export default function LocationForm({ isOpen, onClose }) {
-  const [locationName, setLocationName] = useState();
-  const [locationDescription, setLocationDescription] = useState();
-  const [locationStreetName, setLocationStreetName] = useState();
-  const [locationCity, setLocationCity] = useState();
-  const [locationPostalCode, setLocationPostalCode] = useState();
-  const [locationCountry, setLocationCountry] = useState();
-  const [locationLongitude, setLocationLongitude] = useState();
-  const [locationLatitude, setLocationLatitude] = useState();
-  const [locationImage, setLocationImage] = useState();
+export default function LocationForm({
+  isOpen,
+  onClose,
+  location_id,
+  name,
+  description,
+  street_name,
+  city,
+  postal_code,
+  country,
+  longitude,
+  latitude,
+  images,
+}) {
+  const [locationName, setLocationName] = useState(name || "");
+  const [locationDescription, setLocationDescription] = useState(
+    description || ""
+  );
+  const [locationStreetName, setLocationStreetName] = useState(
+    street_name || ""
+  );
+  const [locationCity, setLocationCity] = useState(city || "");
+  const [locationPostalCode, setLocationPostalCode] = useState(
+    postal_code || ""
+  );
+  const [locationCountry, setLocationCountry] = useState(country || "");
+  const [locationLongitude, setLocationLongitude] = useState(longitude || 0);
+  const [locationLatitude, setLocationLatitude] = useState(latitude || 0);
+  const [locationImage, setLocationImage] = useState(images || "");
 
   const handleLocationCreation = async () => {
     try {
@@ -45,6 +64,41 @@ export default function LocationForm({ isOpen, onClose }) {
     }
   };
 
+  const handleLocationUpdate = async () => {
+    try {
+      const locationData = {
+        location_id: location_id,
+        name: locationName,
+        description: locationDescription,
+        street_name: locationStreetName,
+        city: locationCity,
+        postal_code: locationPostalCode,
+        country: locationCountry,
+        longitude: locationLongitude,
+        latitude: locationLatitude,
+        image: locationImage,
+      };
+      console.log(locationData);
+      const result = await locationAPI.updateLocation(locationData);
+      console.log("Location Update Accomplished");
+    } catch {
+      console.log("Location Update Failed: ", error);
+    }
+  };
+
+  const handleLocationDeletion = async () => {
+    try {
+      const locationData = {
+        location_id: location_id,
+      };
+      console.log(locationData);
+      const result = await locationAPI.deleteLocation(locationData);
+      console.log("Location Update Accomplished");
+    } catch {
+      console.log("Location Update Failed: ", error);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -65,9 +119,6 @@ export default function LocationForm({ isOpen, onClose }) {
                   provide messaging about it
                 </p>
               </ModalHeader>
-              {
-                // name, description, street_name, city, postal_code, country, longitude, latitude
-              }{" "}
               <ModalBody>
                 <div>
                   <Input
@@ -75,6 +126,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     label="Location Name"
                     variant="bordered"
+                    value={locationName}
                     onChange={(event) => setLocationName(event.target.value)}
                   />
                 </div>
@@ -84,6 +136,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     label="Location Image URL"
                     variant="bordered"
+                    value={locationImage}
                     onChange={(event) => setLocationImage(event.target.value)}
                   />
                 </div>
@@ -93,6 +146,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     label="Street Name"
                     variant="bordered"
+                    value={locationStreetName}
                     onChange={(event) =>
                       setLocationStreetName(event.target.value)
                     }
@@ -104,6 +158,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     label="City"
                     variant="bordered"
+                    value={locationCity}
                     onChange={(event) => setLocationCity(event.target.value)}
                   />
                 </div>
@@ -113,6 +168,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     label="Postal Code"
                     variant="bordered"
+                    value={locationPostalCode}
                     onChange={(event) =>
                       setLocationPostalCode(parseInt(event.target.value))
                     }
@@ -124,6 +180,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     label="Country"
                     variant="bordered"
+                    value={locationCountry}
                     onChange={(event) => setLocationCountry(event.target.value)}
                   />
                 </div>
@@ -134,6 +191,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     size={"lg"}
                     variant="bordered"
                     className="text-white "
+                    value={locationDescription}
                     onChange={(event) =>
                       setLocationDescription(event.target.value)
                     }
@@ -147,6 +205,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     label="Latitude"
                     min={"-2000000"}
                     variant="bordered"
+                    value={locationLatitude}
                     onChange={(event) =>
                       setLocationLatitude(parseFloat(event.target.value))
                     }
@@ -158,6 +217,7 @@ export default function LocationForm({ isOpen, onClose }) {
                     label="Longitude"
                     variant="bordered"
                     min={"-2000000"}
+                    value={locationLongitude}
                     onChange={(event) =>
                       setLocationLongitude(parseFloat(event.target.value))
                     }
@@ -165,15 +225,32 @@ export default function LocationForm({ isOpen, onClose }) {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button
-                  className="bg-gradient-to-tr from-orange-200/50 to-blue-950 border-2 border-white text-white shadow-lg font-thin"
-                  onPress={handleLocationCreation}
-                >
-                  Submit
-                </Button>
+                {location_id && (
+                  <Button
+                    color="danger"
+                    variant="bordered"
+                    onPress={handleLocationDeletion}
+                  >
+                    Delete Location
+                  </Button>
+                )}
+                {location_id ? (
+                  <Button
+                    className=" border-white text-white shadow-lg "
+                    variant="bordered"
+                    onPress={handleLocationUpdate}
+                  >
+                    Edit Location
+                  </Button>
+                ) : (
+                  <Button
+                    className="  border-white text-white shadow-lg font-thin"
+                    variant="bordered"
+                    onPress={handleLocationCreation}
+                  >
+                    Create Location
+                  </Button>
+                )}
               </ModalFooter>
             </>
           )}

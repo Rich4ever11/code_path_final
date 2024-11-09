@@ -1,7 +1,14 @@
 import React from "react";
-import { Button, ButtonGroup } from "@nextui-org/button";
+import { Button, useDisclosure } from "@nextui-org/react";
+import LoginForm from "./LoginForm";
 
 export default function HeroSection() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleUserLoginForm = () => {
+    onOpen();
+  };
+
   return (
     <div className="h-screen">
       <div className="static z-40">
@@ -24,6 +31,7 @@ export default function HeroSection() {
                 variant="bordered"
                 size="lg"
                 className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg text-4xl p-8 font-thin rounded-none"
+                onPress={() => handleUserLoginForm()}
               >
                 Login
               </Button>
@@ -37,6 +45,7 @@ export default function HeroSection() {
               </Button>
             </div>
           </div>
+          <LoginForm isOpen={isOpen} onClose={onClose} />
         </div>
       </div>
       <div
