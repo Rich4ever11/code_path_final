@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, useDisclosure } from "@nextui-org/react";
 import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 export default function HeroSection() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalType, setModalType] = useState(true);
 
   const handleUserLoginForm = () => {
+    setModalType(true);
+    onOpen();
+  };
+
+  const handleUserRegistration = () => {
+    setModalType(false);
     onOpen();
   };
 
@@ -40,12 +48,17 @@ export default function HeroSection() {
                 color="primary"
                 variant="bordered"
                 className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg text-4xl p-8 font-thin rounded-none"
+                onPress={() => handleUserRegistration()}
               >
                 Register
               </Button>
             </div>
           </div>
-          <LoginForm isOpen={isOpen} onClose={onClose} />
+          {modalType ? (
+            <LoginForm isOpen={isOpen} onClose={onClose} />
+          ) : (
+            <RegisterForm isOpen={isOpen} onClose={onClose} />
+          )}
         </div>
       </div>
       <div
