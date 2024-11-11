@@ -16,10 +16,14 @@ import { GiDualityMask } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { app } from "../util/firebaseConfig";
+import { UseUserContext } from "../context/userContext";
 
 export default function Navigation() {
   const navigate = useNavigate();
   const auth = getAuth(app);
+  const { currentUser, userLoggedIn, loading } = UseUserContext();
+
+  console.log({ userLoggedIn });
 
   const handleUserLogOut = () => {
     auth.signOut();
@@ -71,7 +75,7 @@ export default function Navigation() {
           <NavbarItem>
             <Link
               color="foreground"
-              href="#"
+              href="/blog"
               className="text-xl border-orange-50  rounded-lg  shadow-slate-400 "
             >
               BLOGS
@@ -103,40 +107,42 @@ export default function Navigation() {
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">
-        <Dropdown
-          placement="bottom-end"
-          className="bg-black/60 border-2 border-white"
-        >
-          <DropdownTrigger>
-            <Avatar
-              as="button"
-              className="transition-transform"
-              color="#D7F8FE"
-              name="Jason Hughes"
-              size="lg"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            />
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Profile Actions"
-            variant="flat"
-            className="text-white"
+        {userLoggedIn && (
+          <Dropdown
+            placement="bottom-end"
+            className="bg-black/60 border-2 border-white"
           >
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
-            </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem
-              key="logout"
-              color="danger"
-              onClick={() => handleUserLogOut()}
+            <DropdownTrigger>
+              <Avatar
+                as="button"
+                className="transition-transform"
+                color="#D7F8FE"
+                name="Jason Hughes"
+                size="lg"
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              />
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label="Profile Actions"
+              variant="flat"
+              className="text-white"
             >
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-semibold">Signed in as</p>
+                <p className="font-semibold">zoey@example.com</p>
+              </DropdownItem>
+              <DropdownItem key="settings">My Settings</DropdownItem>
+              <DropdownItem key="system">System</DropdownItem>
+              <DropdownItem
+                key="logout"
+                color="danger"
+                onClick={() => handleUserLogOut()}
+              >
+                Log Out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        )}
       </NavbarContent>
     </Navbar>
   );

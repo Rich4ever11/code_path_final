@@ -8,6 +8,7 @@ import Locations from "./pages/Locations.jsx";
 import Navigation from "./components/Navigation.jsx";
 import { UseUserContext } from "./context/userContext.jsx";
 import Blog from "./pages/Blog.jsx";
+import Blogs from "./pages/Blogs.jsx";
 import "./App.css";
 
 const App = () => {
@@ -36,6 +37,14 @@ const App = () => {
       path: "/location/:location_id",
       element: userLoggedIn ? (
         <Location title="Location Page" />
+      ) : (
+        <Home title="Home Page" />
+      ),
+    },
+    {
+      path: "/blog",
+      element: userLoggedIn ? (
+        <Blogs title="Blog Page" />
       ) : (
         <Home title="Home Page" />
       ),
