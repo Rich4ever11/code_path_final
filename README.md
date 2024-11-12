@@ -73,6 +73,14 @@ Allow a user to make comments on a location, reply to comments on a location and
 Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
 
 ### ✅✅ Add Location For Romantic Time or Group/FriendShip Building w/ User Authentication
+![ezgif-1-c932bdc0ab](https://github.com/user-attachments/assets/1d95a371-d51d-4326-8541-6bdade45606a)
+
+### ✅✅ Update Location For Romantic Time or Group/FriendShip Building w/ User Authentication
+![ezgif-1-1a967148ca](https://github.com/user-attachments/assets/bd819834-a9b9-4021-903a-e17774506d25)
+
+### ✅✅ Delete Location For Romantic Time or Group/FriendShip Building w/ User Authentication
+![ezgif-1-262a6c5b6b](https://github.com/user-attachments/assets/a8a61544-0181-4062-a687-e8cbc0832fc9)
+
 
 ### Location Blog Creation, Editing, Deletion
 Bloggers can easily create, update, and delete their location blog posts. Bloggers have complete control over their content, allowing them to share, modify, or remove their posts as needed.
