@@ -37,6 +37,11 @@ AWS S3 (USER IMAGES/FILES)
 
 Users will be given the ability to create a profile and login with said created profile. The data a user can add and store includes 3 to 5 pictures of the user, credentials used for authentication, what interests they have, physical attributes, hobbies and much more.
 
+### ✅ User Login And Session Control Using Firebase Authentication
+![ezgif-1-1bec07d4e4](https://github.com/user-attachments/assets/4e4da755-0c32-41e2-9903-d10ecb49845f)
+
+### ✅ User Registration Using both Firebase and Postgres
+![ezgif-1-f807f61bae](https://github.com/user-attachments/assets/036fffbc-51cf-403b-960e-0589b4ff892c)
 
 ### ✅ Search Other Users/Locations
 
@@ -63,11 +68,11 @@ Allow a user to make comments on a location, reply to comments on a location and
 
 
 ### ✅ Add Location For Romantic Time or Group/FriendShip Building
+![ezgif-4-872738fc3f](https://github.com/user-attachments/assets/53047f16-e858-4992-ac30-6f4c87a0291c)
 
 Users can be given the role of location adders or simply add a location they visited give a description about the experience and allow for it to become searchable in the web application
 
-### Locations Creation
-![ezgif-4-872738fc3f](https://github.com/user-attachments/assets/53047f16-e858-4992-ac30-6f4c87a0291c)
+### ✅✅ Add Location For Romantic Time or Group/FriendShip Building w/ User Authentication
 
 ### Location Blog Creation, Editing, Deletion
 Bloggers can easily create, update, and delete their location blog posts. Bloggers have complete control over their content, allowing them to share, modify, or remove their posts as needed.
