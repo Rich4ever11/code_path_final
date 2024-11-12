@@ -1,4 +1,5 @@
-import "./dotenv.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
 import { pool } from "./database.js";
 
 export const createUserTable = async () => {
@@ -7,13 +8,12 @@ export const createUserTable = async () => {
 
     CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
+        firebase_id VARCHAR(255) NOT NULL,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
         username VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL,
         role VARCHAR(255) NOT NULL,
         bio TEXT NOT NULL,
-        email VARCHAR(255) NOT NULL,
         imgURL TEXT[] NOT NULL,
         created_at NUMERIC(100, 2) NOT NULL
         )
@@ -168,9 +168,9 @@ export const createChatTable = async () => {
   }
 };
 
-// await createUserTable();
+await createUserTable();
 // await createLocationTable();
-await createBlogTable();
+// await createBlogTable();
 // await createLocationCommentsTable();
 // await createBlogCommentsTable();
 // await createConnectionTable();
