@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 // import UserContext from "./UserContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../util/firebaseConfig";
+import userAPI from "../api/userAPI";
 
 const UserContext = createContext({});
 
@@ -9,6 +10,7 @@ export function UserContextProvider({ children }) {
   const auth = getAuth(app);
 
   const [currentUser, setCurrentUser] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -18,9 +20,16 @@ export function UserContextProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  function initUser(user) {
+  async function initUser(user) {
     if (user) {
       setCurrentUser({ ...user });
+      if (userDetails === null) {
+        console.log(user);
+        const user_details = await userAPI.getUserDetails({
+          firebase_id: user.uid,
+        });
+        setUserDetails(user_details[0]);
+      }
       setUserLoggedIn(true);
     } else {
       setCurrentUser(null);
@@ -32,6 +41,7 @@ export function UserContextProvider({ children }) {
   const value = {
     currentUser,
     userLoggedIn,
+    userDetails,
     loading,
     initUser,
   };

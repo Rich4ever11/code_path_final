@@ -6,9 +6,11 @@ import { CiSearch } from "react-icons/ci";
 import locationAPI from "../api/locationAPI.js";
 import { useNavigate } from "react-router-dom";
 import LocationForm from "../components/LocationForm";
+import { UseUserContext } from "../context/userContext";
 
 export default function Location() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const navigate = useNavigate();
   const [locationSearch, setLocationSearch] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -69,9 +71,12 @@ export default function Location() {
         </div>
       </div>
       <div className="max-w-full gap-2 grid grid-cols-12 grid-rows-2 px-8">
-        {locationSearch.map((location) => (
+        {locationSearch.map((location, index) => (
           <>
-            <Card className="col-span-12 sm:col-span-4 h-[600px] shadow-lg shadow-black border-2 border-white/5">
+            <Card
+              className="col-span-12 sm:col-span-4 h-[600px] shadow-lg shadow-black border-2 border-white/5"
+              key={index}
+            >
               <CardHeader className="absolute z-10 top-1 flex-col !items-start">
                 <p className="text-2xl text-white/80 uppercase font-thin">
                   {location.street_name}, {location.city}, {location.country}{" "}
@@ -86,13 +91,15 @@ export default function Location() {
               </CardHeader>
 
               <div className="absolute z-10 bottom-1 right-1 flex-col !items-start">
-                <Button
-                  variant="ghost"
-                  className="bg-gradient-to-tr from-pink-500/90 to-yellow-500/90 border-2 border-white text-white shadow-lg font-normal my-4"
-                  onClick={() => handleEditLocation(location.id)}
-                >
-                  Edit Location
-                </Button>
+                {location.user_id === userDetails.id && (
+                  <Button
+                    variant="ghost"
+                    className="bg-gradient-to-tr from-pink-500/90 to-yellow-500/90 border-2 border-white text-white shadow-lg font-normal my-4"
+                    onClick={() => handleEditLocation(location.id)}
+                  >
+                    Edit Location
+                  </Button>
+                )}
                 <Button
                   className="mx-2 bg-gradient-to-tr from-orange-200/100 to-blue-950/5 border-2 border-white text-white shadow-lg font-normal my-4"
                   onClick={() => navigate(`/location/${location.id}`)}

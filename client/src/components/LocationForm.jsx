@@ -10,6 +10,7 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import locationAPI from "../api/locationAPI.js";
+import { UseUserContext } from "../context/userContext";
 
 export default function LocationForm({
   isOpen,
@@ -25,6 +26,7 @@ export default function LocationForm({
   latitude,
   images,
 }) {
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const [locationName, setLocationName] = useState(name || "");
   const [locationDescription, setLocationDescription] = useState(
     description || ""
@@ -44,7 +46,7 @@ export default function LocationForm({
   const handleLocationCreation = async () => {
     try {
       const locationData = {
-        user_id: 1,
+        user_id: userDetails.id,
         name: locationName,
         description: locationDescription,
         street_name: locationStreetName,
@@ -81,6 +83,7 @@ export default function LocationForm({
       console.log(locationData);
       const result = await locationAPI.updateLocation(locationData);
       console.log("Location Update Accomplished");
+      onClose;
     } catch {
       console.log("Location Update Failed: ", error);
     }

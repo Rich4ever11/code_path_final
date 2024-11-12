@@ -7,16 +7,13 @@ import {
   ModalFooter,
   Button,
   Input,
+  Textarea,
   Avatar,
 } from "@nextui-org/react";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import userAPI from "../api/userAPI";
 import { app } from "../util/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm({ isOpen, onClose }) {
   const [firstName, setFirstName] = useState("");
@@ -24,19 +21,37 @@ export default function RegisterForm({ isOpen, onClose }) {
   const [profileImage, setProfileImage] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
+  const auth = getAuth(app);
+  const navigate = useNavigate();
 
-  const handleUserRegistration = () => {
-    console.log({
-      firstName,
-      lastName,
-      profileImage,
+  const convertStringToArray = (value) => {
+    return "{" + value + "}";
+  };
+
+  const handleUserRegistration = async () => {
+    if (email == "" || password == "") {
+      return;
+    }
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
       email,
-      username,
-      password,
-      passwordCheck,
-    });
+      password
+    );
+
+    const requestBody = {
+      firebase_id: userCredentials.user.uid,
+      firstName: firstName,
+      lastName: lastName,
+      imgurl: convertStringToArray(profileImage),
+      username: username,
+      bio: bio,
+      role: "user",
+    };
+    console.log(requestBody);
+    const result = await userAPI.createUserAccount(requestBody);
+    window.location.reload();
   };
 
   return (
@@ -111,6 +126,17 @@ export default function RegisterForm({ isOpen, onClose }) {
                   />
                 </div>
                 <div>
+                  <Textarea
+                    label="Description"
+                    placeholder="Enter your description"
+                    size={"lg"}
+                    variant="bordered"
+                    className="text-white "
+                    value={bio}
+                    onChange={(event) => setBio(event.target.value)}
+                  />
+                </div>
+                <div>
                   <Input
                     className="text-white"
                     size={"lg"}
@@ -119,17 +145,6 @@ export default function RegisterForm({ isOpen, onClose }) {
                     type="password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                  />
-                </div>
-                <div>
-                  <Input
-                    className="text-white"
-                    size={"lg"}
-                    label="Password Check"
-                    variant="bordered"
-                    type="password"
-                    value={passwordCheck}
-                    onChange={(event) => setPasswordCheck(event.target.value)}
                   />
                 </div>
               </ModalBody>

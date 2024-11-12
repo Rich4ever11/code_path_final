@@ -24,7 +24,6 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
   const [ratingSystem, setRatingSystem] = useState([0, 0, 0, 0, 0]);
 
   const convertListToString = (arrayValue) => {
-    console.log(arrayValue);
     return "{" + arrayValue.join(",") + "}";
   };
 

@@ -19,11 +19,9 @@ import { app } from "../util/firebaseConfig";
 import { UseUserContext } from "../context/userContext";
 
 export default function Navigation() {
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const navigate = useNavigate();
   const auth = getAuth(app);
-  const { currentUser, userLoggedIn, loading } = UseUserContext();
-
-  console.log({ userLoggedIn });
 
   const handleUserLogOut = () => {
     auth.signOut();
@@ -107,21 +105,29 @@ export default function Navigation() {
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">
-        {userLoggedIn && (
+        {userDetails && userLoggedIn && (
           <Dropdown
             placement="bottom-end"
             className="bg-black/60 border-2 border-white"
           >
             <DropdownTrigger>
-              <Avatar
-                as="button"
-                className="transition-transform"
-                color="#D7F8FE"
-                name="Jason Hughes"
-                size="lg"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
+              <button className="m-4">
+                <Avatar
+                  as="button"
+                  className="transition-transform"
+                  color="#D7F8FE"
+                  name="Jason Hughes"
+                  size="lg"
+                  src={userDetails.imgurl[0]}
+                />
+                <div className="flex justify-center">
+                  <p className="text-white font-thin text-2xl">
+                    {userDetails.username}
+                  </p>
+                </div>
+              </button>
             </DropdownTrigger>
+
             <DropdownMenu
               aria-label="Profile Actions"
               variant="flat"
@@ -129,7 +135,11 @@ export default function Navigation() {
             >
               <DropdownItem key="profile" className="h-14 gap-2">
                 <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
+                <p className="font-semibold">
+                  {userDetails
+                    ? `${userDetails.first_name} ${userDetails.last_name}`
+                    : "Email Not Found"}
+                </p>
               </DropdownItem>
               <DropdownItem key="settings">My Settings</DropdownItem>
               <DropdownItem key="system">System</DropdownItem>

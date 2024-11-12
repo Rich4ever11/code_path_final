@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Button, useDisclosure } from "@nextui-org/react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import { UseUserContext } from "../context/userContext";
 
 export default function HeroSection() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [modalType, setModalType] = useState(true);
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
+
+  console.log(loading, userLoggedIn);
 
   const handleUserLoginForm = () => {
     setModalType(true);
@@ -34,25 +38,29 @@ export default function HeroSection() {
               nights. 🥂
             </p>
 
-            <div className="flex justify-center">
-              <Button
-                variant="bordered"
-                size="lg"
-                className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg text-4xl p-8 font-thin rounded-none"
-                onPress={() => handleUserLoginForm()}
-              >
-                Login
-              </Button>
-              <div className="p-4"></div>
-              <Button
-                color="primary"
-                variant="bordered"
-                className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg text-4xl p-8 font-thin rounded-none"
-                onPress={() => handleUserRegistration()}
-              >
-                Register
-              </Button>
-            </div>
+            {!loading && !userLoggedIn ? (
+              <div className="flex justify-center">
+                <Button
+                  variant="bordered"
+                  size="lg"
+                  className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg text-4xl p-8 font-thin rounded-none"
+                  onPress={() => handleUserLoginForm()}
+                >
+                  Login
+                </Button>
+                <div className="p-4"></div>
+                <Button
+                  color="primary"
+                  variant="bordered"
+                  className="bg-gradient-to-tr from-orange-200/50 to-blue-950/10 border-2 border-white text-white shadow-lg text-4xl p-8 font-thin rounded-none"
+                  onPress={() => handleUserRegistration()}
+                >
+                  Register
+                </Button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           {modalType ? (
             <LoginForm isOpen={isOpen} onClose={onClose} />

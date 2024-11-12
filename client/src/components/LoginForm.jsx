@@ -60,7 +60,7 @@ export default function LoginForm({ isOpen, onClose }) {
                   <Input
                     className="text-white"
                     size={"lg"}
-                    label="Username"
+                    label="Email"
                     variant="bordered"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
