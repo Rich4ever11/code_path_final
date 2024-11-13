@@ -9,8 +9,6 @@ export default function HeroSection() {
   const [modalType, setModalType] = useState(true);
   const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
 
-  console.log(loading, userLoggedIn);
-
   const handleUserLoginForm = () => {
     setModalType(true);
     onOpen();

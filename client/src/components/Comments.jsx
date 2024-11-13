@@ -1,32 +1,33 @@
 import React, { useState } from "react";
 import { Textarea, Button, Avatar } from "@nextui-org/react";
 import commentsAPI from "../api/commentsAPI.js";
+import { UseUserContext } from "../context/userContext";
 
 export default function Comments({ commentsList, id, commentType }) {
-  const user_id = 1;
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const [comment, setComment] = useState("");
 
   const handleCommentCreation = async () => {
-    // try {
-    if (commentType === "location") {
-      const requestBody = {
-        user_id: user_id,
-        location_id: id,
-        comment: comment,
-      };
-      console.log(requestBody);
-      const response = await commentsAPI.createLocationComment(requestBody);
-      setComment("");
-    } else if (commentType === "blog") {
-      const requestBody = {
-        user_id: user_id,
-        blog_id: id,
-        comment: comment,
-      };
+    try {
+      if (commentType === "location") {
+        const requestBody = {
+          user_id: userDetails.id,
+          location_id: id,
+          comment: comment,
+        };
+        console.log(requestBody);
+        const response = await commentsAPI.createLocationComment(requestBody);
+        setComment("");
+      } else if (commentType === "blog") {
+        const requestBody = {
+          user_id: userDetails.id,
+          blog_id: id,
+          comment: comment,
+        };
+      }
+    } catch (error) {
+      console.log("comment creation failed", error);
     }
-    // } catch {
-    //   console.log("comment creation failed");
-    // }
   };
 
   return (

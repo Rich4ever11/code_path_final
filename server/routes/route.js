@@ -10,6 +10,7 @@ const router = express.Router();
 
 // define routes to get, create, edit, and delete items
 router.post("/user", user.createNewUser);
+router.get("/user", user.getAllUsers);
 router.get("/user/:id", user.getUserByFirebaseId);
 
 router.get("/location", location.getAllLocations);

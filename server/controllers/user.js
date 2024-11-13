@@ -58,7 +58,25 @@ const getUserByFirebaseId = async (request, response) => {
   }
 };
 
+const getAllUsers = async () => {
+  const getUserQuery = `
+    SELECT *
+    FROM users
+    ORDER BY id ASC
+    `;
+
+  try {
+    const result = await pool.query(getUserQuery);
+    console.log("🎉 users obtained");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing user: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   createNewUser,
   getUserByFirebaseId,
+  getAllUsers,
 };
