@@ -60,7 +60,6 @@ export default function LocationForm({
       console.log(locationData);
       const result = await locationAPI.createLocation(locationData);
       console.log("Location Creation Accomplished");
-      onClose();
     } catch (error) {
       console.log("Location Creation Failed: ", error);
     }

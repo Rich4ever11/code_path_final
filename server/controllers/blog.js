@@ -4,7 +4,7 @@ import { getTimeInSeconds } from "../util/timelib.js";
 
 const getAllBlogs = async (request, response) => {
   const getBlogsQuery = `
-    SELECT (user_id, location_id, title, rating, likes, images, created_at)
+    SELECT user_id, location_id, title, rating, likes, images, description, created_at
     FROM blog
     ORDER BY id ASC
 `;

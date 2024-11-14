@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation.jsx";
 import { UseUserContext } from "./context/userContext.jsx";
 import Blog from "./pages/Blog.jsx";
 import Blogs from "./pages/Blogs.jsx";
+import Users from "./pages/Users.jsx";
 import "./App.css";
 
 const App = () => {
@@ -53,6 +54,14 @@ const App = () => {
       path: "/blog/:blog_id",
       element: userLoggedIn ? (
         <Blog title="Blog Page" />
+      ) : (
+        <Home title="Home Page" />
+      ),
+    },
+    {
+      path: "/users",
+      element: userLoggedIn ? (
+        <Users title="Find Users" />
       ) : (
         <Home title="Home Page" />
       ),

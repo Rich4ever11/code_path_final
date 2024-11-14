@@ -14,31 +14,42 @@ import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import blogAPI from "../api/blogAPI.js";
+import { UseUserContext } from "../context/userContext";
 
-export default function BlogForm({ isOpen, onClose, locationId, userId }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [blogContent, setBlogContent] = useState("");
-  const [images, setImages] = useState([""]);
-  const [rating, setRating] = useState(0);
-  const [ratingSystem, setRatingSystem] = useState([0, 0, 0, 0, 0]);
+export default function BlogForm({
+  isOpen,
+  onClose,
+  locationId,
+  title,
+  description,
+  content,
+  images,
+  rating,
+}) {
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
+  const [blogTitle, setBlogTitle] = useState(title || "");
+  const [blogDescription, setBlogDescription] = useState(description || "");
+  const [blogContent, setBlogContent] = useState(content || "");
+  const [blogImages, setBlogImages] = useState(images || [""]);
+  const [blogRating, setBlogRating] = useState(rating || 0);
+  const [blogRatingSystem, setBlogRatingSystem] = useState([0, 0, 0, 0, 0]);
 
   const convertListToString = (arrayValue) => {
     return "{" + arrayValue.join(",") + "}";
   };
 
   const handleBlogCreation = async () => {
-    const ratingValue = ratingSystem.reduce(
+    const ratingValue = blogRatingSystem.reduce(
       (partialSum, rate) => partialSum + rate,
       0
     );
     const requestBody = {
       location_id: parseInt(locationId),
-      user_id: userId,
-      title: title,
-      description: description,
+      user_id: userDetails.id,
+      title: blogTitle,
+      description: blogDescription,
       blog_content: blogContent,
-      images: convertListToString(images),
+      images: convertListToString(blogImages),
       rating: ratingValue,
     };
     const response = await blogAPI.createBlog(requestBody);
@@ -52,13 +63,13 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
   };
 
   const handleAddImage = (event) => {
-    setImages([...images, ""]);
+    setBlogImages([...blogImages, ""]);
   };
 
   const handleRemoveImage = (event) => {
     try {
-      images.pop();
-      setImages([...images]);
+      blogImages.pop();
+      setBlogImages([...blogImages]);
     } catch {
       console.log("No Images");
     }
@@ -94,7 +105,8 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                         size={"lg"}
                         label="Title"
                         variant="bordered"
-                        onChange={(event) => setTitle(event.target.value)}
+                        value={blogTitle}
+                        onChange={(event) => setBlogTitle(event.target.value)}
                       />
                     </div>
                     <div>
@@ -104,7 +116,10 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                         size={"lg"}
                         variant="bordered"
                         className="text-white "
-                        onChange={(event) => setDescription(event.target.value)}
+                        value={blogDescription}
+                        onChange={(event) =>
+                          setBlogDescription(event.target.value)
+                        }
                       />
                     </div>
 
@@ -115,12 +130,13 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                         size={"lg"}
                         variant="bordered"
                         className="text-white "
+                        value={blogContent}
                         onChange={(event) => setBlogContent(event.target.value)}
                       />
                     </div>
 
                     <div>
-                      {images.map((imageInput, index) => (
+                      {blogImages.map((imageInput, index) => (
                         <Input
                           className="text-white placeholder:text-white py-1"
                           size={"lg"}
@@ -130,8 +146,8 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                             handleListUpdate(
                               index,
                               event.target.value,
-                              images,
-                              setImages
+                              blogImages,
+                              setBlogImages
                             )
                           }
                         />
@@ -161,20 +177,20 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                     </div>
 
                     <div>
-                      {ratingSystem.map((rating, index) => (
+                      {blogRatingSystem.map((rating, index) => (
                         <Checkbox
                           key={index}
                           defaultSelected
                           icon={<FaStar />}
                           color="warning"
-                          isSelected={ratingSystem[index]}
-                          value={ratingSystem[index]}
+                          isSelected={blogRatingSystem[index]}
+                          value={blogRatingSystem[index]}
                           onValueChange={(value) => {
                             handleListUpdate(
                               index,
                               value,
-                              ratingSystem,
-                              setRatingSystem
+                              blogRatingSystem,
+                              setBlogRatingSystem
                             );
                           }}
                         ></Checkbox>

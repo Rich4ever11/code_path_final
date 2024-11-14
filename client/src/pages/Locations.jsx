@@ -44,7 +44,7 @@ export default function Location() {
   };
 
   return (
-    <div className="h-full px-10 bg-no-repeat bg-cover bg-center bg-fixed bg-[url('https://images.unsplash.com/photo-1444210971048-6130cf0c46cf?q=80&w=2673&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
+    <div className="h-full px-10 bg-no-repeat bg-cover bg-center bg-fixed bg-[url('https://images.unsplash.com/photo-1729486241550-309caff79bd3?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
       <div className="py-8">
         <h1
           className="text-8xl text-white font-thin underline italic"
@@ -101,7 +101,7 @@ export default function Location() {
                   </Button>
                 )}
                 <Button
-                  className="mx-2 bg-gradient-to-tr from-orange-200/100 to-blue-950/5 border-2 border-white text-white shadow-lg font-normal my-4"
+                  className="bg-black/50 mx-2 border-2 border-white text-white shadow-lg font-normal my-4"
                   onClick={() => navigate(`/location/${location.id}`)}
                 >
                   View Location
