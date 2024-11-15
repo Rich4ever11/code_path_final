@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Button, useDisclosure } from "@nextui-org/react";
 import { Input, Textarea } from "@nextui-org/react";
 import { CiSearch } from "react-icons/ci";
-import locationAPI from "../api/locationAPI.js";
+import locationAPI from "../api/location.js";
 import { useNavigate } from "react-router-dom";
 import LocationForm from "../components/LocationForm";
 import { UseUserContext } from "../context/userContext";

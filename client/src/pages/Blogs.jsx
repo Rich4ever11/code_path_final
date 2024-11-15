@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { UseUserContext } from "../context/userContext";
-import blogAPI from "../api/blogAPI";
+import blogAPI from "../api/blog.js";
 
 export default function Blogs() {
   const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();

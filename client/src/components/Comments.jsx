@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Textarea, Button, Avatar } from "@nextui-org/react";
-import commentsAPI from "../api/commentsAPI.js";
+import commentsAPI from "../api/comments.js";
 import { UseUserContext } from "../context/userContext";
 
 export default function Comments({ commentsList, id, commentType }) {

@@ -5,6 +5,8 @@ import user from "../controllers/user.js";
 import location from "../controllers/location.js";
 import blog from "../controllers/blog.js";
 import comments from "../controllers/comments.js";
+import connection from "../controllers/connection.js";
+import chat from "../controllers/chat.js";
 
 const router = express.Router();
 
@@ -36,8 +38,19 @@ router.put("/location_comment", comments.updateLocationComment);
 router.delete("/location_comment", comments.deleteLocationComment);
 
 router.get("/blog_comment", comments.getAllBlogComments);
+router.get("/blog_comment/:blog_id", comments.getAllBlogCommentsByBlogId);
 router.post("/blog_comment", comments.createBlogComment);
 router.put("/blog_comment", comments.updateBlogComment);
 router.delete("/blog_comment", comments.deleteBlogComment);
+
+router.post("/connection", connection.createConnection);
+router.post("/connection/accept", connection.acceptConnection);
+router.post("/connection/reject", connection.rejectConnection);
+router.get("/connection/:id", connection.getConnectionsByUserId);
+router.get("/connection/valid/:id", connection.getValidConnectionsByUserId);
+
+router.post("/chat", chat.handleMessageCreation);
+router.get("/chat/:connection_id", chat.handleChatRender);
+router.get("/chat/user/:user_id", chat.handleMessageLog);
 
 export default router;

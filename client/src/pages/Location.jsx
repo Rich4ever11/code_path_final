@@ -5,11 +5,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import BlogCard from "../components/BlogCard";
 import BlogForm from "../components/BlogForm";
 import { Button, useDisclosure } from "@nextui-org/react";
-import blogAPI from "../api/blogAPI.js";
-import locationAPI from "../api/locationAPI.js";
+import blogAPI from "../api/blog.js";
+import locationAPI from "../api/location.js";
 import Comments from "../components/Comments.jsx";
 import { testBlogs } from "../data/dummyData.js";
-import commentsAPI from "../api/commentsAPI.js";
+import commentsAPI from "../api/comments.js";
 
 export default function Location() {
   const { location_id } = useParams();

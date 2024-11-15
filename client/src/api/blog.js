@@ -1,8 +1,8 @@
 const getAllBlogs = async () => {
   try {
     const response = await fetch("/api/blog");
-    const blogData = await response.json();
-    return blogData.data;
+    const blog = await response.json();
+    return blog.data;
   } catch {
     return [];
   }
@@ -11,8 +11,8 @@ const getAllBlogs = async () => {
 const getBlogsById = async (blog_id) => {
   try {
     const response = await fetch(`/api/blog/${blog_id}`);
-    const blogData = await response.json();
-    return blogData.data;
+    const blog = await response.json();
+    return blog.data;
   } catch {
     return [];
   }
@@ -21,8 +21,8 @@ const getBlogsById = async (blog_id) => {
 const getBlogsByLocation = async (location_id) => {
   try {
     const response = await fetch(`/api/blog/location/${location_id}`);
-    const blogData = await response.json();
-    return blogData.data;
+    const blog = await response.json();
+    return blog.data;
   } catch {
     return [];
   }

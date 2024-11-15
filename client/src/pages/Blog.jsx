@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import blogAPI from "../api/blogAPI.js";
+import blogAPI from "../api/blog.js";
 import BlogCard from "../components/BlogCard";
 import { useParams } from "react-router-dom";
 import Comments from "../components/Comments.jsx";

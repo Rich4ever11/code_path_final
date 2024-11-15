@@ -13,7 +13,7 @@ import {
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
-import blogAPI from "../api/blogAPI.js";
+import blogAPI from "../api/blog.js";
 import { UseUserContext } from "../context/userContext";
 
 export default function BlogForm({

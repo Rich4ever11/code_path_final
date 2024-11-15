@@ -9,7 +9,7 @@ import {
   Input,
   Textarea,
 } from "@nextui-org/react";
-import locationAPI from "../api/locationAPI.js";
+import locationAPI from "../api/location.js";
 import { UseUserContext } from "../context/userContext";
 
 export default function LocationForm({

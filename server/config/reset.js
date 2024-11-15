@@ -136,7 +136,7 @@ export const createConnectionTable = async () => {
             send_user INTEGER REFERENCES users(id) NOT NULL,
             receive_user INTEGER REFERENCES users(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
-            accepted BOOLEAN NOT NULL
+            accepted BOOLEAN
         )
     `;
 

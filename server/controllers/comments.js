@@ -1,6 +1,7 @@
 import "../config/dotenv.js";
 import { pool } from "../config/database.js";
 import { getTimeInSeconds } from "../util/timelib.js";
+import { request, response } from "express";
 
 const getAllLocationComments = async (request, response) => {
   const getLocationCommentsQuery = `
@@ -131,6 +132,25 @@ const getAllBlogComments = async (request, response) => {
   }
 };
 
+const getAllBlogCommentsByBlogId = async (request, response) => {
+  const blog_id = request.params.blog_id;
+
+  const getBlogCommentsByBlogId = `
+    SELECT *
+    FROM blog_comment
+    WHERE blog_id = $1
+    `;
+
+  try {
+    const result = await pool.query(getBlogCommentsByBlogId, [blog_id]);
+    console.log("🎉 blog comment data found");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing blog comment data: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 const createBlogComment = async (request, response) => {
   const { user_id, blog_id, comment } = request.body;
   const created_at = getTimeInSeconds();
@@ -215,6 +235,7 @@ export default {
   deleteLocationComment,
 
   getAllBlogComments,
+  getAllBlogCommentsByBlogId,
   createBlogComment,
   updateBlogComment,
   deleteBlogComment,
