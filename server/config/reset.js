@@ -154,6 +154,7 @@ export const createChatTable = async () => {
     
         CREATE TABLE IF NOT EXISTS chat (
             id SERIAL PRIMARY KEY,
+            user_id INTEGER REFERENCES users(id) NOT NULL,
             connection_id INTEGER REFERENCES connection(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             message TEXT NOT NULL

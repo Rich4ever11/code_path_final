@@ -19,6 +19,7 @@ import { UseUserContext } from "../context/userContext";
 export default function BlogForm({
   isOpen,
   onClose,
+  blog_id,
   locationId,
   title,
   description,
@@ -54,6 +55,38 @@ export default function BlogForm({
     };
     const response = await blogAPI.createBlog(requestBody);
     onClose();
+  };
+
+  const handleBlogUpdate = async () => {
+    try {
+      const blogData = {
+        blog_id: blog_id,
+        title: blogTitle,
+        description: blogDescription,
+        blog_content: blogContent,
+        images: convertListToString(blogImages),
+        rating: ratingValue,
+      };
+      console.log(locationData);
+      const result = await blogAPI.updateBlog(blogData);
+      console.log("Blog Update Accomplished");
+      onClose;
+    } catch {
+      console.log("Blog Update Failed: ", error);
+    }
+  };
+
+  const handleLocationDeletion = async () => {
+    try {
+      const blogData = {
+        blog_id: blog_id,
+      };
+      console.log(blogData);
+      const result = await blogAPI.deleteLocation(blogData);
+      console.log("Blog Update Accomplished");
+    } catch {
+      console.log("Blog Update Failed: ", error);
+    }
   };
 
   const handleListUpdate = (index, newValue, Array, updateArrayFunc) => {

@@ -21,6 +21,8 @@ router.get("/location/:id", location.getLocationById);
 
 router.get("/blog", blog.getAllBlogs);
 router.post("/blog", blog.createBlog);
+router.put("/blog", blog.updateBlog);
+router.delete("/blog", blog.deleteBlog);
 router.get("/blog/:id", blog.getBlogById);
 router.get("/blog/location/:id", blog.getBlogByLocationId);
 

@@ -43,9 +43,41 @@ const createBlog = async (requestBody) => {
   }
 };
 
+const deleteBlog = async (requestBody) => {
+  try {
+    const response = await fetch("/api/blog", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+    return { result: "success" };
+  } catch {
+    return { result: "error" };
+  }
+};
+
+const updateBlog = async (requestBody) => {
+  try {
+    const response = await fetch("/api/blog", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+    return { result: "success" };
+  } catch {
+    return { result: "error" };
+  }
+};
+
 export default {
   getAllBlogs,
   createBlog,
   getBlogsByLocation,
   getBlogsById,
+  deleteBlog,
+  updateBlog,
 };
