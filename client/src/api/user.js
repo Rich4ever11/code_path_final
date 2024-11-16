@@ -25,7 +25,18 @@ const getUserDetails = async (requestBody) => {
   }
 };
 
+const getAllUsers = async () => {
+  try {
+    const response = await fetch(`/api/user`);
+    const user = await response.json();
+    return user.data;
+  } catch {
+    return { result: "error" };
+  }
+};
+
 export default {
   createUserAccount,
   getUserDetails,
+  getAllUsers,
 };

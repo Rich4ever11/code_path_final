@@ -1,3 +1,7 @@
+import "../config/dotenv.js";
+import { pool } from "../config/database.js";
+import { getTimeInSeconds } from "../util/timelib.js";
+
 const handleMessageCreation = async (request, response) => {
   const { user_id, connection_id, message } = request.body;
   const created_at = getTimeInSeconds();

@@ -1,3 +1,7 @@
+import "../config/dotenv.js";
+import { pool } from "../config/database.js";
+import { getTimeInSeconds } from "../util/timelib.js";
+
 const createConnection = async (request, response) => {
   const { send_user, receive_user } = request.body;
   const created_at = getTimeInSeconds();
@@ -58,14 +62,14 @@ const acceptConnection = async (request, response) => {
   }
 };
 
-const getConnectionsByUserId = async () => {
+const getConnectionsByUserId = async (request, response) => {
   const receiver_id = request.params.id;
 
   const getConnectionsById = `
-      SELECT *
+      SELECT connection.id as connection_id, username, imgurl
       FROM connection
-      WHERE receive_user = $1
-      ORDER BY id ASC
+      JOIN users ON users.id = connection.send_user
+      WHERE connection.receive_user = $1 AND accepted IS NULL
       `;
 
   try {
@@ -78,7 +82,7 @@ const getConnectionsByUserId = async () => {
   }
 };
 
-const getValidConnectionsByUserId = async () => {
+const getValidConnectionsByUserId = async (request, response) => {
   const receiver_id = request.params.id;
 
   const getConnectionsById = `

@@ -23,7 +23,6 @@ export default function Location() {
   useEffect(() => {
     const getBlogData = async () => {
       try {
-        //This can be its own join query
         const blogData = await blogAPI.getBlogsByLocation(location_id);
         const locationData = await locationAPI.getLocationById(location_id);
         const commentsData = await commentsAPI.getCommentByLocationId(

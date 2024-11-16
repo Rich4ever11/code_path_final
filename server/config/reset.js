@@ -169,10 +169,10 @@ export const createChatTable = async () => {
   }
 };
 
-await createUserTable();
+// await createUserTable();
 // await createLocationTable();
 // await createBlogTable();
 // await createLocationCommentsTable();
 // await createBlogCommentsTable();
-// await createConnectionTable();
+await createConnectionTable();
 // await createChatTable();
