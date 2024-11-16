@@ -35,7 +35,7 @@ export const createLocationTable = async () => {
           id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users (id) NOT NULL,
           name VARCHAR(255) NOT NULL,
-          description VARCHAR(255) NOT NULL,
+          description TEXT NOT NULL,
           street_name VARCHAR(255) NOT NULL,
           city VARCHAR(255) NOT NULL,  
           postal_code NUMERIC(100, 2) NOT NULL,

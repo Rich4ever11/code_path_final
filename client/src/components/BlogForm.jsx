@@ -41,6 +41,8 @@ export default function BlogForm({
     return "{" + arrayValue.join(",") + "}";
   };
 
+  console.log(blogTitle);
+
   const handleBlogCreation = async () => {
     const ratingValue = blogRatingSystem.reduce(
       (partialSum, rate) => partialSum + rate,
@@ -258,7 +260,7 @@ export default function BlogForm({
                     variant="bordered"
                     onPress={handleBlogUpdate}
                   >
-                    Edit Blog
+                    Update Blog
                   </Button>
                 ) : (
                   <Button

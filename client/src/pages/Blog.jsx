@@ -4,7 +4,7 @@ import BlogCard from "../components/BlogCard";
 import { useParams } from "react-router-dom";
 import Comments from "../components/Comments.jsx";
 import { testComments } from "../data/dummyData.js";
-import { Button, useDisclosure } from "@nextui-org/react";
+import { Button, Avatar, useDisclosure } from "@nextui-org/react";
 import userAPI from "../api/user.js";
 import { UseUserContext } from "../context/userContext";
 import BlogForm from "../components/BlogForm";
@@ -67,15 +67,12 @@ export default function Blog() {
             <header class="mb-4 lg:mb-6 not-format">
               <address class="flex items-center mb-6 not-italic">
                 <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                  <img
-                    class="mr-4 w-16 h-20 rounded-full object-fit"
-                    src={
-                      blogCreatorData
-                        ? `${blogCreatorData.imgurl}`
-                        : "User Not Found"
-                    }
-                    alt="Jese Leos"
-                  />
+                  <div className="border-medium border-cyan-100 rounded-full p-1 h-fit w-fit flex-none align-middle mr-4">
+                    <Avatar
+                      src={blogCreatorData.imgurl}
+                      className="w-24 h-24 text-large"
+                    />
+                  </div>
                   <div>
                     <a
                       href="#"
@@ -167,6 +164,7 @@ export default function Blog() {
             commentsList={blogComments}
             id={blog_id}
             commentType={"blog"}
+            profilePicture={userDetails.imgurl[0]}
           />
         </div>
       </aside>

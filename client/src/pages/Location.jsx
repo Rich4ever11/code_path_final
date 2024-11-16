@@ -10,11 +10,12 @@ import locationAPI from "../api/location.js";
 import Comments from "../components/Comments.jsx";
 import { testBlogs } from "../data/dummyData.js";
 import commentsAPI from "../api/comments.js";
+import { UseUserContext } from "../context/userContext";
 
 export default function Location() {
   const { location_id } = useParams();
   // handle obtaining users id
-  const user_id = 1;
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [location, setLocation] = useState({});
   const [blogs, setBlogs] = useState([]);
@@ -92,13 +93,13 @@ export default function Location() {
         </p>
 
         <div className="flex flex-row-reverse p-2 py-6">
-          <Button
+          {/* <Button
             size="lg"
             variant="bordered"
             className="bg-gradient-to-tr from-cyan-200/50 to-blue-950/10 text-slate-50 border-cyan-100 font-thin text-2xl py-8 rounded-full"
           >
             Read Comments
-          </Button>
+          </Button> */}
           <div className="p-2"></div>
           <Button
             size="lg"
@@ -123,16 +124,17 @@ export default function Location() {
                 />
               </div>
             ))}
-
+            {/* 
             {testBlogs.map((blog, index) => (
               <div key={index}>
                 <BlogCard blogTitle={blog.blogTitle} imgURL={[blog.imgURL]} />
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
 
         <Comments
+          profilePicture={userDetails.imgurl[0]}
           commentsList={locationComments}
           id={location_id}
           commentType={"location"}
@@ -143,7 +145,7 @@ export default function Location() {
         isOpen={isOpen}
         onClose={onClose}
         locationId={location_id}
-        userId={user_id}
+        userId={userDetails.id}
       />
     </div>
   );

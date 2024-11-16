@@ -36,6 +36,7 @@ export default function LoginForm({ isOpen, onClose }) {
     );
     console.log(userCredential);
     // onClose();
+    window.location.reload();
   };
 
   return (

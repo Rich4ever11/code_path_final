@@ -24,26 +24,33 @@ export default function Chat() {
   }, []);
 
   return (
-    <div className="flex h-screen bg-no-repeat bg-cover bg-center bg-fixed bg-[url('https://images.unsplash.com/photo-1691627497619-f2cf7fcf7f3d?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
-      <div className="basis-1/4">
-        <UserChatFooter
-          connections={userConnections}
-          selectConnection={setSelectedConversation}
-        />
-      </div>
-      <div className="basis-3/4">
-        {selectedConversation.connection_id && (
-          <Conversation
-            key={selectedConversation}
-            connection_id={selectedConversation.connection_id}
-            user_id={userDetails.id}
-            username={userDetails.username}
-            user_profile_pic={userDetails.imgurl[0]}
-            receiver_username={selectedConversation.username}
-            receiver_profile_pic={selectedConversation.imgurl[0]}
+    <>
+      {userConnections.length === 0 && (
+        <div className="text-2xl font-thin flex justify-center">
+          <h1>{"Send a Connection To Start Chatting :)"}</h1>
+        </div>
+      )}
+      <div className="flex h-screen bg-no-repeat bg-cover bg-center bg-fixed bg-[url('https://images.unsplash.com/photo-1691627497619-f2cf7fcf7f3d?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
+        <div className="basis-1/4">
+          <UserChatFooter
+            connections={userConnections}
+            selectConnection={setSelectedConversation}
           />
-        )}
+        </div>
+        <div className="basis-3/4">
+          {selectedConversation.connection_id && (
+            <Conversation
+              key={selectedConversation}
+              connection_id={selectedConversation.connection_id}
+              user_id={userDetails.id}
+              username={userDetails.username}
+              user_profile_pic={userDetails.imgurl[0]}
+              receiver_username={selectedConversation.username}
+              receiver_profile_pic={selectedConversation.imgurl[0]}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

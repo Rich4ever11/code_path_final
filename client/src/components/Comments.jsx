@@ -3,7 +3,12 @@ import { Textarea, Button, Avatar } from "@nextui-org/react";
 import commentsAPI from "../api/comments.js";
 import { UseUserContext } from "../context/userContext";
 
-export default function Comments({ commentsList, id, commentType }) {
+export default function Comments({
+  commentsList,
+  id,
+  commentType,
+  profilePicture,
+}) {
   const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const [comment, setComment] = useState("");
 
@@ -44,10 +49,7 @@ export default function Comments({ commentsList, id, commentType }) {
         <div className="">
           <div className="w-full p-10 flex bg-black/30 border-2 border-white/5 rounded-md shadow-lg shadow-black">
             <div className="border-medium border-cyan-100 rounded-full p-1 h-fit w-fit flex-none align-middle mr-4">
-              <Avatar
-                src="https://i.pravatar.cc/150?u=a04258114e29026708c"
-                className="w-24 h-24 text-large"
-              />
+              <Avatar src={profilePicture} className="w-24 h-24 text-large" />
             </div>
             <div className="flex-1">
               <Textarea
