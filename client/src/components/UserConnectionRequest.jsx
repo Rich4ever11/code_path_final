@@ -8,9 +8,11 @@ import {
   Button,
 } from "@nextui-org/react";
 import connectionAPI from "../api/connection";
+import { useNavigate } from "react-router-dom";
 
 export default function UserConnectionRequest({ loggedInUser }) {
   const [pendingConnections, setPendingConnections] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleConnections = async () => {
@@ -27,14 +29,16 @@ export default function UserConnectionRequest({ loggedInUser }) {
     const requestBody = {
       connection_id,
     };
-    const result = connectionAPI.handleConnectionAccept(requestBody);
+    const result = await connectionAPI.handleAcceptConnection(requestBody);
+    navigate("/chat");
   };
 
   const handleConnectionReject = async (connection_id) => {
     const requestBody = {
       connection_id,
     };
-    const result = connectionAPI.handleConnectionReject(requestBody);
+    const result = await connectionAPI.handleRejectConnection(requestBody);
+    navigate("/chat");
   };
 
   return (
@@ -47,14 +51,16 @@ export default function UserConnectionRequest({ loggedInUser }) {
           User Requests
         </h1>
       </div>
-      <div className="flex py-2 pb-4 space-x-8 w-full overflow-auto">
+      <div className="flex py-2 pb-4 space-x-8 overflow-auto">
         {pendingConnections.map((connection, key) => (
-          <div className="relative shrink-0">
+          <div className="relative shrink-0 m-2">
             <Avatar
               src={connection.imgurl[0]}
-              className="w-30 h-30 text-large"
+              size="lg"
+              isBordered
+              className="w-32 h-32 text-large"
             />
-            <div className="pt-4 absolute bottom-0 right-0 space-x-2">
+            <div className="pt-4 flex absolute bottom-0 right-0">
               <Button
                 className={""}
                 color="primary"
@@ -74,7 +80,6 @@ export default function UserConnectionRequest({ loggedInUser }) {
                 {"Decline"}
               </Button>
             </div>
-            {connection.username}
           </div>
         ))}
       </div>

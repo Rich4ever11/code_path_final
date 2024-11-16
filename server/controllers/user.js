@@ -58,6 +58,23 @@ const getUserByFirebaseId = async (request, response) => {
   }
 };
 
+const getUserById = async (request, response) => {
+  const user_id = request.params.id;
+  const getUserQuery = `
+    SELECT *
+    FROM users
+    WHERE id = $1`;
+
+  try {
+    const result = await pool.query(getUserQuery, [user_id]);
+    console.log("🎉 user obtained");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing user: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 const getAllUsers = async (request, response) => {
   const getUserQuery = `
     SELECT *
@@ -97,6 +114,7 @@ const getAllUsers = async (request, response) => {
 
 export default {
   createNewUser,
+  getUserById,
   getUserByFirebaseId,
   getAllUsers,
   // getUsersByConnections,

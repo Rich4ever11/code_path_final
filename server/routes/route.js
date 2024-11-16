@@ -14,6 +14,7 @@ const router = express.Router();
 router.post("/user", user.createNewUser);
 router.get("/user", user.getAllUsers);
 router.get("/user/:id", user.getUserByFirebaseId);
+router.get("/user/detail/:id", user.getUserById);
 // router.get("/user/connections/:id", user.getUsersByConnections);
 
 router.get("/location", location.getAllLocations);

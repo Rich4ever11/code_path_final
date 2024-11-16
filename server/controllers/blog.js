@@ -5,7 +5,7 @@ import { request, response } from "express";
 
 const getAllBlogs = async (request, response) => {
   const getBlogsQuery = `
-    SELECT user_id, location_id, title, rating, likes, images, description, created_at
+    SELECT id, user_id, location_id, title, rating, likes, images, description, created_at
     FROM blog
     ORDER BY id ASC
 `;

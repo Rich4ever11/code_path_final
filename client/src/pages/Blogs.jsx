@@ -30,6 +30,7 @@ export default function Blogs() {
   useEffect(() => {
     const renderBlogData = async () => {
       const blogs = await blogAPI.getAllBlogs();
+      console.log(blogs);
       setBlogs(blogs);
       setBlogSearch(blogs);
     };
@@ -60,8 +61,11 @@ export default function Blogs() {
       </div>
 
       <div className="max-w-full gap-2 grid grid-cols-12 grid-rows-2 px-8">
-        {blogSearch.map((blog) => (
-          <Card className="col-span-12 sm:col-span-4 h-[300px] shadow-xl shadow-black">
+        {blogSearch.map((blog, index) => (
+          <Card
+            key={index}
+            className="col-span-12 sm:col-span-4 h-[300px] shadow-xl shadow-black"
+          >
             <CardHeader className="absolute z-10 top-1 flex-col !items-start">
               <div className="h-20 overflow-y-scroll">
                 <p className="text-2xl text-white/60 uppercase font-thin">
@@ -69,12 +73,15 @@ export default function Blogs() {
                 </p>
               </div>
 
-              <h4
-                className="text-white font-thin text-6xl"
-                style={{ textShadow: "1px 5px 5px black" }}
-              >
-                {blog.title}
-              </h4>
+              <div className="h-20 overflow-y-scroll">
+                <h4
+                  className="text-white font-thin text-6xl"
+                  style={{ textShadow: "1px 5px 5px black" }}
+                >
+                  {blog.title}
+                </h4>
+              </div>
+
               <div className="py-4">
                 <Button
                   size="md"

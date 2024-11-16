@@ -27,6 +27,8 @@ export default function BlogForm({
   images,
   rating,
 }) {
+  // console.log(blog_id, locationId, title, description, content, images, rating);
+  console.log(title, images);
   const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const [blogTitle, setBlogTitle] = useState(title || "");
   const [blogDescription, setBlogDescription] = useState(description || "");
@@ -76,13 +78,13 @@ export default function BlogForm({
     }
   };
 
-  const handleLocationDeletion = async () => {
+  const handleBlogDeletion = async () => {
     try {
       const blogData = {
         blog_id: blog_id,
       };
       console.log(blogData);
-      const result = await blogAPI.deleteLocation(blogData);
+      const result = await blogAPI.deleteBlog(blogData);
       console.log("Blog Update Accomplished");
     } catch {
       console.log("Blog Update Failed: ", error);
@@ -120,15 +122,14 @@ export default function BlogForm({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-white font-thin text-4xl">
-                Blog Creation
+                {blog_id ? "Blog Edit" : "Blog Creation"}
               </ModalHeader>
               <div className="flex justify-center">
                 <ModalBody>
                   <p className="font-thin text-3xl text-white">
-                    You can begin creating your blog here and add extensive
-                    detail about the specific location referenced. Be sure to
-                    include insightful information and pictures so that your
-                    blog stands out.
+                    {blog_id
+                      ? "Below you can edit the current blog you are working on. Make sure all your edits are done"
+                      : "You can begin creating your blog here and add extensive detail about the specific location referenced. Be sure to include insightful information and pictures so that your blog stands out."}
                   </p>
 
                   <div className="grid grid-flow-row space-y-2">
@@ -242,14 +243,32 @@ export default function BlogForm({
                 >
                   Close
                 </Button>
-                <Button
-                  color="primary"
-                  variant="bordered"
-                  onPress={handleBlogCreation}
-                  className="text-2xl py-6"
-                >
-                  Submit
-                </Button>
+                {blog_id && (
+                  <Button
+                    color="danger"
+                    variant="bordered"
+                    onPress={handleBlogDeletion}
+                  >
+                    Delete Blog
+                  </Button>
+                )}
+                {blog_id ? (
+                  <Button
+                    className=" border-white text-white shadow-lg "
+                    variant="bordered"
+                    onPress={handleBlogUpdate}
+                  >
+                    Edit Blog
+                  </Button>
+                ) : (
+                  <Button
+                    className="  border-white text-white shadow-lg font-thin"
+                    variant="bordered"
+                    onPress={handleBlogCreation}
+                  >
+                    Create Blog
+                  </Button>
+                )}
               </ModalFooter>
             </>
           )}

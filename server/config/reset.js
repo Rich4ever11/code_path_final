@@ -174,5 +174,5 @@ export const createChatTable = async () => {
 // await createBlogTable();
 // await createLocationCommentsTable();
 // await createBlogCommentsTable();
-await createConnectionTable();
-// await createChatTable();
+// await createConnectionTable();
+await createChatTable();

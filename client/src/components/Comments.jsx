@@ -24,6 +24,8 @@ export default function Comments({ commentsList, id, commentType }) {
           blog_id: id,
           comment: comment,
         };
+        const response = await commentsAPI.createBlogComment(requestBody);
+        setComment("");
       }
     } catch (error) {
       console.log("comment creation failed", error);
@@ -54,6 +56,7 @@ export default function Comments({ commentsList, id, commentType }) {
                 labelPlacement="outside"
                 placeholder="Enter your comment"
                 className="max-full"
+                value={comment}
                 onChange={(event) => setComment(event.target.value)}
               />
 

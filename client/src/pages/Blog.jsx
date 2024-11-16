@@ -4,18 +4,26 @@ import BlogCard from "../components/BlogCard";
 import { useParams } from "react-router-dom";
 import Comments from "../components/Comments.jsx";
 import { testComments } from "../data/dummyData.js";
-import { Button } from "@nextui-org/react";
+import { Button, useDisclosure } from "@nextui-org/react";
+import userAPI from "../api/user.js";
+import { UseUserContext } from "../context/userContext";
+import BlogForm from "../components/BlogForm";
+import commentsAPI from "../api/comments.js";
 
 export default function Blog() {
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { blog_id } = useParams();
   const [blogData, setBlogData] = useState({});
+  const [blogComments, setBlogComments] = useState([]);
+  const [blogCreatorData, setBlogCreatorData] = useState({});
   const [recentBlogs, setRecentBlogs] = useState([]);
   const [paragraphs, setParagraphs] = useState([]);
   const [images, setImages] = useState([]);
   const [locationID, setLocationID] = useState("");
 
   useEffect(() => {
-    const renderLocationData = async () => {
+    const renderBlogData = async () => {
       // this could be implemented in the backend as a join obtaining data such as user info, blog data and location data
       const blog = await blogAPI.getBlogsById(blog_id);
       if (blog.length > 0) {
@@ -28,17 +36,28 @@ export default function Blog() {
         setImages(blogImages);
 
         const location_id = blog[0].location_id;
+        const blogComments = await commentsAPI.getCommentByBlogId(blog_id);
+        const userDetails = await userAPI.getUserDetailsById({
+          user_id: blog[0].user_id,
+        });
         const recentBlogData = await blogAPI.getBlogsByLocation(location_id);
         const recentBlogsFiltered = recentBlogData.filter(
           (blog) => blog.id != blog_id
         );
-        console.log(recentBlogsFiltered);
+        console.log(userDetails);
+        setBlogCreatorData(userDetails[0]);
         setRecentBlogs(recentBlogsFiltered);
+        setBlogComments(blogComments);
       } else {
+        console.log("Blog Not Found");
       }
     };
-    renderLocationData();
+    renderBlogData();
   }, []);
+
+  const handleOpenEditBlogModal = () => {
+    onOpen();
+  };
 
   return (
     <div>
@@ -49,8 +68,12 @@ export default function Blog() {
               <address class="flex items-center mb-6 not-italic">
                 <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                   <img
-                    class="mr-4 w-16 h-16 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                    class="mr-4 w-16 h-20 rounded-full object-fit"
+                    src={
+                      blogCreatorData
+                        ? `${blogCreatorData.imgurl}`
+                        : "User Not Found"
+                    }
                     alt="Jese Leos"
                   />
                   <div>
@@ -59,19 +82,14 @@ export default function Blog() {
                       rel="author"
                       class="text-xl font-bold text-gray-900 dark:text-white"
                     >
-                      Jese Leos
+                      {blogCreatorData
+                        ? `${blogCreatorData.first_name} ${blogCreatorData.last_name}`
+                        : "User Not Found"}
                     </a>
                     <p class="text-base text-gray-500 dark:text-gray-400">
-                      Graphic Designer, educator & CEO Flowbite
-                    </p>
-                    <p class="text-base text-gray-500 dark:text-gray-400">
-                      <time
-                        pubdate
-                        dateTime="2022-02-08"
-                        title="February 8th, 2022"
-                      >
-                        Feb. 8, 2022
-                      </time>
+                      {blogCreatorData
+                        ? `${blogCreatorData.username}`
+                        : "User Not Found"}
                     </p>
                   </div>
                 </div>
@@ -98,9 +116,29 @@ export default function Blog() {
               </div>
             ))}
 
-            <div className="py-4">
-              <Button className="">Edit Blog</Button>
-            </div>
+            {blogCreatorData &&
+              blogData &&
+              blogCreatorData.id === userDetails.id && (
+                <div className="py-4">
+                  <Button className="" onClick={handleOpenEditBlogModal}>
+                    Edit Blog
+                  </Button>
+                </div>
+              )}
+
+            {blogData && (
+              <BlogForm
+                isOpen={isOpen}
+                onClose={onClose}
+                blog_id={blogData.id}
+                locationId={blogData.location_id}
+                userId={blogData.user_id}
+                title={blogData.title}
+                description={blogData.description}
+                content={blogData.blog_content}
+                images={blogData.images}
+              />
+            )}
           </article>
         </div>
       </main>
@@ -125,7 +163,11 @@ export default function Blog() {
             ))}
         </div>
         <div className="m-20">
-          <Comments commentsList={testComments} commentType={"blog"} />
+          <Comments
+            commentsList={blogComments}
+            id={blog_id}
+            commentType={"blog"}
+          />
         </div>
       </aside>
     </div>
