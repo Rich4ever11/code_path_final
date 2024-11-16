@@ -7,7 +7,7 @@ Designed and developed by: Richard Aja, Winnie Liang, Gayatri Soni
 ### 🔗 Link to deployed app:
 
 ### 🔗 Video Demo Link: [Location/Blog Functionality](https://drive.google.com/file/d/1xIvp3Da7mfimuLF_DKecCeVH_zypyMst/view?usp=sharing)
-### 🔗 Video Demo Link [Connection/Chat Functionality](https://drive.google.com/file/d/12haAWwbAZa-0MrthXdr6cuHM2_dggBcX/view?usp=sharing)
+### 🔗 Video Demo Link: [Connection/Chat Functionality](https://drive.google.com/file/d/12haAWwbAZa-0MrthXdr6cuHM2_dggBcX/view?usp=sharing)
 
 
 
