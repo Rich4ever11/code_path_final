@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"cd client && vite\" \"cd server && nodemon server\"",
     "start": "cd server && npm install && node server",
-    "build": "cd client && npm install && vite build"
+    "build": "cd client && npm install && npm install vite && vite build"
   },
   "author": "Richard Aja",
   "license": "ISC",
