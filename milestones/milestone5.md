@@ -78,6 +78,8 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 
 ![ezgif-2-659e70a1de](https://github.com/user-attachments/assets/c508f7df-f40c-4219-a0f5-08a24580d193)
 
+![ezgif-3-eb4e58e6ad](https://github.com/user-attachments/assets/f4914397-1b74-42ff-acd6-958ca06fb34b)
+
 ## Reflection
 
 ### 1. What went well during this unit?
