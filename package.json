@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"cd client && vite\" \"cd server && nodemon server\"",
     "start": "cd server && npm install && node server",
-    "build": "cd client && npm install --production=false && npm install vite && vite build"
+    "build": "cd client && npm install && vite build"
   },
   "author": "Richard Aja",
   "license": "ISC",
@@ -46,15 +46,6 @@
     "stream-browserify": "^3.0.0",
     "universal-cookie": "^7.2.2",
     "util": "^0.12.5",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react": "^3.1.0",
-    "tailwindcss": "^3.4.13",
-    "vite": "^4.2.0",
-    "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-plugin-node-stdlib-browser": "^0.2.1"
-  },
-  "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
