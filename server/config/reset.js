@@ -35,7 +35,7 @@ export const createLocationTable = async () => {
           id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users (id) NOT NULL,
           name VARCHAR(255) NOT NULL,
-          description VARCHAR(255) NOT NULL,
+          description TEXT NOT NULL,
           street_name VARCHAR(255) NOT NULL,
           city VARCHAR(255) NOT NULL,  
           postal_code NUMERIC(100, 2) NOT NULL,
@@ -136,7 +136,7 @@ export const createConnectionTable = async () => {
             send_user INTEGER REFERENCES users(id) NOT NULL,
             receive_user INTEGER REFERENCES users(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
-            accepted BOOLEAN NOT NULL
+            accepted BOOLEAN
         )
     `;
 
@@ -154,6 +154,7 @@ export const createChatTable = async () => {
     
         CREATE TABLE IF NOT EXISTS chat (
             id SERIAL PRIMARY KEY,
+            user_id INTEGER REFERENCES users(id) NOT NULL,
             connection_id INTEGER REFERENCES connection(id) NOT NULL,
             created_at NUMERIC(100, 2) NOT NULL,
             message TEXT NOT NULL
@@ -168,10 +169,10 @@ export const createChatTable = async () => {
   }
 };
 
-await createUserTable();
+// await createUserTable();
 // await createLocationTable();
 // await createBlogTable();
 // await createLocationCommentsTable();
 // await createBlogCommentsTable();
 // await createConnectionTable();
-// await createChatTable();
+await createChatTable();

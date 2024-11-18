@@ -25,7 +25,30 @@ const getUserDetails = async (requestBody) => {
   }
 };
 
+const getUserDetailsById = async (requestBody) => {
+  try {
+    const { user_id } = requestBody;
+    const response = await fetch(`/api/user/detail/${user_id}`);
+    const user = await response.json();
+    return user.data;
+  } catch {
+    return { result: "error" };
+  }
+};
+
+const getAllUsers = async () => {
+  try {
+    const response = await fetch(`/api/user`);
+    const user = await response.json();
+    return user.data;
+  } catch {
+    return { result: "error" };
+  }
+};
+
 export default {
   createUserAccount,
+  getUserDetailsById,
   getUserDetails,
+  getAllUsers,
 };

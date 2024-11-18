@@ -8,7 +8,7 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import userAPI from "../api/userAPI";
+import userAPI from "../api/user";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -36,6 +36,7 @@ export default function LoginForm({ isOpen, onClose }) {
     );
     console.log(userCredential);
     // onClose();
+    window.location.reload();
   };
 
   return (

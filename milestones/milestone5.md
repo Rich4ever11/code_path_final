@@ -24,73 +24,78 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 
 👉🏾👉🏾👉🏾 Check off each completed feature below.
 
-- [ ] The project includes an Express backend app and a React frontend app
-- [ ] The project includes these backend-specific features:
-  - [ ] At least one of each of the following database relationship in Postgres
-    - [ ] one-to-many
-    - [ ] many-to-many with a join table
-  - [ ] A well-designed RESTful API
-    - [ ] The API can respond to at least one of each type of request: GET, POST, PATCH, and DELETE
-    - [ ] Routes follow proper naming conventions
-  - [ ] The ability to reset the database to its default state
-- [ ] The project includes these frontend-specific features:
-  - [ ] At least one redirection
-  - [ ] At least one interaction that the user can initiate and complete on the same page without navigating to a new page
-  - [ ] Dynamic frontend routes created with React Router
-  - [ ] Hierarchically designed React components
-    - [ ] Components broken down into categories, including Page and Component types
-    - [ ] Corresponding container components and presenter components as appropriate
-- [ ] The project includes dynamic routes for both frontend and backend apps
+- [x] The project includes an Express backend app and a React frontend app
+- [x] The project includes these backend-specific features:
+  - [x] At least one of each of the following database relationship in Postgres
+    - [x] one-to-many
+    - [x] many-to-many with a join table
+  - [x] A well-designed RESTful API
+    - [x] The API can respond to at least one of each type of request: GET, POST, PATCH, and DELETE
+    - [x] Routes follow proper naming conventions
+  - [x] The ability to reset the database to its default state
+- [x] The project includes these frontend-specific features:
+  - [x] At least one redirection
+  - [x] At least one interaction that the user can initiate and complete on the same page without navigating to a new page
+  - [x] Dynamic frontend routes created with React Router
+  - [x] Hierarchically designed React components
+    - [x] Components broken down into categories, including Page and Component types
+    - [x] Corresponding container components and presenter components as appropriate
+- [x] The project includes dynamic routes for both frontend and backend apps
 - [ ] The project is deployed on Railway with all pages and features working
 
 ### Custom Features
 
 👉🏾👉🏾👉🏾 Check off each completed feature below.
 
-- [ ] The project gracefully handles errors
+- [x] The project gracefully handles errors
 - [ ] The project includes a one-to-one database relationship
-- [ ] The project includes a slide-out pane or modal as appropriate for your use case
+- [x] The project includes a slide-out pane or modal as appropriate for your use case
 - [ ] The project includes a unique field within the join table
 - [ ] The project includes a custom non-RESTful route with corresponding controller actions
-- [ ] The project allows filtering and/or sorting as appropriate for your use case
-- [ ] Data is automatically generated in response to a certain event or user action. Examples include generating a default inventory for a new user starting a game or creating a starter set of tasks for a user creating a new task app account
+- [x] The project allows filtering and/or sorting as appropriate for your use case
+- [x] Data is automatically generated in response to a certain event or user action. Examples include generating a default inventory for a new user starting a game or creating a starter set of tasks for a user creating a new task app account
 - [ ] Data submitted via a POST or PATCH request is validated before the database is updated
 
 ### Stretch Features
 
 👉🏾👉🏾👉🏾 Check off each completed feature below.
 
-- [ ] A subset of pages require the user to log in before accessing the content
+- [x] A subset of pages require the user to log in before accessing the content
   - [ ] Users can log in and log out via GitHub OAuth with Passport.js
+  - [x] Users can log in and log out via Firebase OAuth
 - [ ] Restrict available user options dynamically, such as restricting available purchases based on a user's currency
-- [ ] Show a spinner while a page or page element is loading
+- [x] Show a spinner while a page or page element is loading
 - [ ] Disable buttons and inputs during the form submission process
-- [ ] Disable buttons after they have been clicked
+- [x] Disable buttons after they have been clicked
 - [ ] Users can upload images to the app and have them be stored on a cloud service
 - [ ] 🍞 [Toast messages](https://www.patternfly.org/v3/pattern-library/communication/toast-notifications/index.html) deliver simple feedback in response to user events
 
 ## Final Demo GIF
 
-🔗 [Here's a GIF walkthrough of the final project](👉🏾👉🏾👉🏾 your link here)
+![ezgif-2-d65bd636bf](https://github.com/user-attachments/assets/8477985d-244d-440f-b21a-bd3fc0e22c22)
+
+![ezgif-2-3e92319fd5](https://github.com/user-attachments/assets/2451b00c-d9e8-4846-aa25-626ae36f7ad2)
+
+![ezgif-2-659e70a1de](https://github.com/user-attachments/assets/c508f7df-f40c-4219-a0f5-08a24580d193)
 
 ## Reflection
 
 ### 1. What went well during this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Completing work early went well, We had time for adding fixes, finding bugs, and adding data.
 
 ### 2. What were some challenges your group faced in this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Working with too many routes can become confusing and hard. What worked was sectioning features off.
 
 ### 3. What were some of the highlights or achievements that you are most proud of in this project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Overall the completion of the backend and front end looks good. Also using a join with the connections table and users table.
 
 ### 4. Reflecting on your web development journey so far, how have you grown since the beginning of the course?
 
-[👉🏾👉🏾👉🏾 your answer here]
+We have grown to embrace various technologies and find solutions to problems that stretch various languages and domains.
 
 ### 5. Looking ahead, what are your goals related to web development, and what steps do you plan to take to achieve them?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Our goals are to become better full stack developers and taking more courses related to web and app developement.

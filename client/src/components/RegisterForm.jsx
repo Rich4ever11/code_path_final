@@ -11,7 +11,7 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import userAPI from "../api/userAPI";
+import userAPI from "../api/user";
 import { app } from "../util/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 

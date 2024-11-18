@@ -48,7 +48,7 @@ export default function Navigation() {
 
       <NavbarContent className="hidden sm:flex gap-2">
         <NavbarItem>
-          <Button variant="light" className="p-0 border-white border-2">
+          <Button variant="light" className="p-0">
             <Link
               color="foreground"
               href="/chat"
@@ -58,7 +58,7 @@ export default function Navigation() {
             </Link>
           </Button>
         </NavbarItem>
-        <Button variant="light" className="p-2 border-white border-2">
+        <Button variant="light" className="p-2 ">
           <NavbarItem isActive>
             <Link
               href="/location"
@@ -69,7 +69,7 @@ export default function Navigation() {
             </Link>
           </NavbarItem>
         </Button>
-        <Button variant="light" className="p-2 border-white border-2">
+        <Button variant="light" className="p-2 ">
           <NavbarItem>
             <Link
               color="foreground"
@@ -80,18 +80,18 @@ export default function Navigation() {
             </Link>
           </NavbarItem>
         </Button>
-        <Button variant="light" className="p-2 border-white border-2">
+        <Button variant="light" className="p-2 ">
           <NavbarItem>
             <Link
               color="foreground"
-              href="#"
-              className="text-xl border-orange-50  rounded-lg  shadow-slate-400 "
+              href="/users"
+              className="text-xl border-orange-50  rounded-lg  shadow-slate-400"
             >
-              RESOURCES
+              USERS
             </Link>
           </NavbarItem>
         </Button>
-        <Button variant="light" className="p-2 border-white border-2">
+        {/* <Button variant="light" className="p-2 border-white border-2">
           <NavbarItem>
             <Link
               color="foreground"
@@ -101,7 +101,7 @@ export default function Navigation() {
               ABOUT
             </Link>
           </NavbarItem>
-        </Button>
+        </Button> */}
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">
@@ -111,7 +111,7 @@ export default function Navigation() {
             className="bg-black/60 border-2 border-white"
           >
             <DropdownTrigger>
-              <button className="m-4">
+              <button className="m-4 flex space-x-2">
                 <Avatar
                   as="button"
                   className="transition-transform"
@@ -120,8 +120,8 @@ export default function Navigation() {
                   size="lg"
                   src={userDetails.imgurl[0]}
                 />
-                <div className="flex justify-center">
-                  <p className="text-white font-thin text-2xl">
+                <div className="grid content-center ">
+                  <p className="text-white font-thin text-2xl align-middle ">
                     {userDetails.username}
                   </p>
                 </div>

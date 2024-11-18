@@ -58,7 +58,64 @@ const getUserByFirebaseId = async (request, response) => {
   }
 };
 
+const getUserById = async (request, response) => {
+  const user_id = request.params.id;
+  const getUserQuery = `
+    SELECT *
+    FROM users
+    WHERE id = $1`;
+
+  try {
+    const result = await pool.query(getUserQuery, [user_id]);
+    console.log("🎉 user obtained");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing user: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
+const getAllUsers = async (request, response) => {
+  const getUserQuery = `
+    SELECT *
+    FROM users
+    ORDER BY id ASC
+    `;
+
+  try {
+    const result = await pool.query(getUserQuery);
+    console.log("🎉 users obtained");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error grabbing user: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
+// const getUsersByConnections = async (request, response) => {
+//   const user_id = request.params.id;
+
+//   const getConnectionsById = `
+//       SELECT *
+//       FROM users
+//       LEFT JOIN connection ON CAST(users.id as INTEGER) == CAST(connection.send_user as INTEGER)
+//       WHERE users.id != $1
+//       `;
+
+//   try {
+//     const result = await pool.query(getConnectionsById, [user_id]);
+//     console.log("🎉 users obtained");
+//     response.status(200).json({ data: result.rows });
+//   } catch (error) {
+//     console.error("⚠️ error grabbing users: ", error);
+//     response.status(500).json({ error: error.message });
+//   }
+// };
+
 export default {
   createNewUser,
+  getUserById,
   getUserByFirebaseId,
+  getAllUsers,
+  // getUsersByConnections,
 };

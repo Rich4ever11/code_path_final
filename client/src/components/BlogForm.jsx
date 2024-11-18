@@ -13,36 +13,84 @@ import {
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
-import blogAPI from "../api/blogAPI.js";
+import blogAPI from "../api/blog.js";
+import { UseUserContext } from "../context/userContext";
 
-export default function BlogForm({ isOpen, onClose, locationId, userId }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [blogContent, setBlogContent] = useState("");
-  const [images, setImages] = useState([""]);
-  const [rating, setRating] = useState(0);
-  const [ratingSystem, setRatingSystem] = useState([0, 0, 0, 0, 0]);
+export default function BlogForm({
+  isOpen,
+  onClose,
+  blog_id,
+  locationId,
+  title,
+  description,
+  content,
+  images,
+  rating,
+}) {
+  // console.log(blog_id, locationId, title, description, content, images, rating);
+  console.log(title, images);
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
+  const [blogTitle, setBlogTitle] = useState(title || "");
+  const [blogDescription, setBlogDescription] = useState(description || "");
+  const [blogContent, setBlogContent] = useState(content || "");
+  const [blogImages, setBlogImages] = useState(images || [""]);
+  const [blogRating, setBlogRating] = useState(rating || 0);
+  const [blogRatingSystem, setBlogRatingSystem] = useState([0, 0, 0, 0, 0]);
 
   const convertListToString = (arrayValue) => {
     return "{" + arrayValue.join(",") + "}";
   };
 
+  console.log(blogTitle);
+
   const handleBlogCreation = async () => {
-    const ratingValue = ratingSystem.reduce(
+    const ratingValue = blogRatingSystem.reduce(
       (partialSum, rate) => partialSum + rate,
       0
     );
     const requestBody = {
       location_id: parseInt(locationId),
-      user_id: userId,
-      title: title,
-      description: description,
+      user_id: userDetails.id,
+      title: blogTitle,
+      description: blogDescription,
       blog_content: blogContent,
-      images: convertListToString(images),
+      images: convertListToString(blogImages),
       rating: ratingValue,
     };
     const response = await blogAPI.createBlog(requestBody);
     onClose();
+  };
+
+  const handleBlogUpdate = async () => {
+    try {
+      const blogData = {
+        blog_id: blog_id,
+        title: blogTitle,
+        description: blogDescription,
+        blog_content: blogContent,
+        images: convertListToString(blogImages),
+        rating: ratingValue,
+      };
+      console.log(locationData);
+      const result = await blogAPI.updateBlog(blogData);
+      console.log("Blog Update Accomplished");
+      onClose;
+    } catch {
+      console.log("Blog Update Failed: ", error);
+    }
+  };
+
+  const handleBlogDeletion = async () => {
+    try {
+      const blogData = {
+        blog_id: blog_id,
+      };
+      console.log(blogData);
+      const result = await blogAPI.deleteBlog(blogData);
+      console.log("Blog Update Accomplished");
+    } catch {
+      console.log("Blog Update Failed: ", error);
+    }
   };
 
   const handleListUpdate = (index, newValue, Array, updateArrayFunc) => {
@@ -52,13 +100,13 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
   };
 
   const handleAddImage = (event) => {
-    setImages([...images, ""]);
+    setBlogImages([...blogImages, ""]);
   };
 
   const handleRemoveImage = (event) => {
     try {
-      images.pop();
-      setImages([...images]);
+      blogImages.pop();
+      setBlogImages([...blogImages]);
     } catch {
       console.log("No Images");
     }
@@ -76,15 +124,14 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-white font-thin text-4xl">
-                Blog Creation
+                {blog_id ? "Blog Edit" : "Blog Creation"}
               </ModalHeader>
               <div className="flex justify-center">
                 <ModalBody>
                   <p className="font-thin text-3xl text-white">
-                    You can begin creating your blog here and add extensive
-                    detail about the specific location referenced. Be sure to
-                    include insightful information and pictures so that your
-                    blog stands out.
+                    {blog_id
+                      ? "Below you can edit the current blog you are working on. Make sure all your edits are done"
+                      : "You can begin creating your blog here and add extensive detail about the specific location referenced. Be sure to include insightful information and pictures so that your blog stands out."}
                   </p>
 
                   <div className="grid grid-flow-row space-y-2">
@@ -94,7 +141,8 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                         size={"lg"}
                         label="Title"
                         variant="bordered"
-                        onChange={(event) => setTitle(event.target.value)}
+                        value={blogTitle}
+                        onChange={(event) => setBlogTitle(event.target.value)}
                       />
                     </div>
                     <div>
@@ -104,7 +152,10 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                         size={"lg"}
                         variant="bordered"
                         className="text-white "
-                        onChange={(event) => setDescription(event.target.value)}
+                        value={blogDescription}
+                        onChange={(event) =>
+                          setBlogDescription(event.target.value)
+                        }
                       />
                     </div>
 
@@ -115,12 +166,13 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                         size={"lg"}
                         variant="bordered"
                         className="text-white "
+                        value={blogContent}
                         onChange={(event) => setBlogContent(event.target.value)}
                       />
                     </div>
 
                     <div>
-                      {images.map((imageInput, index) => (
+                      {blogImages.map((imageInput, index) => (
                         <Input
                           className="text-white placeholder:text-white py-1"
                           size={"lg"}
@@ -130,8 +182,8 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                             handleListUpdate(
                               index,
                               event.target.value,
-                              images,
-                              setImages
+                              blogImages,
+                              setBlogImages
                             )
                           }
                         />
@@ -161,20 +213,20 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                     </div>
 
                     <div>
-                      {ratingSystem.map((rating, index) => (
+                      {blogRatingSystem.map((rating, index) => (
                         <Checkbox
                           key={index}
                           defaultSelected
                           icon={<FaStar />}
                           color="warning"
-                          isSelected={ratingSystem[index]}
-                          value={ratingSystem[index]}
+                          isSelected={blogRatingSystem[index]}
+                          value={blogRatingSystem[index]}
                           onValueChange={(value) => {
                             handleListUpdate(
                               index,
                               value,
-                              ratingSystem,
-                              setRatingSystem
+                              blogRatingSystem,
+                              setBlogRatingSystem
                             );
                           }}
                         ></Checkbox>
@@ -193,14 +245,32 @@ export default function BlogForm({ isOpen, onClose, locationId, userId }) {
                 >
                   Close
                 </Button>
-                <Button
-                  color="primary"
-                  variant="bordered"
-                  onPress={handleBlogCreation}
-                  className="text-2xl py-6"
-                >
-                  Submit
-                </Button>
+                {blog_id && (
+                  <Button
+                    color="danger"
+                    variant="bordered"
+                    onPress={handleBlogDeletion}
+                  >
+                    Delete Blog
+                  </Button>
+                )}
+                {blog_id ? (
+                  <Button
+                    className=" border-white text-white shadow-lg "
+                    variant="bordered"
+                    onPress={handleBlogUpdate}
+                  >
+                    Update Blog
+                  </Button>
+                ) : (
+                  <Button
+                    className="  border-white text-white shadow-lg font-thin"
+                    variant="bordered"
+                    onPress={handleBlogCreation}
+                  >
+                    Create Blog
+                  </Button>
+                )}
               </ModalFooter>
             </>
           )}

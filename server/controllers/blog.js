@@ -1,10 +1,11 @@
 import "../config/dotenv.js";
 import { pool } from "../config/database.js";
 import { getTimeInSeconds } from "../util/timelib.js";
+import { request, response } from "express";
 
 const getAllBlogs = async (request, response) => {
   const getBlogsQuery = `
-    SELECT (user_id, location_id, title, rating, likes, images, created_at)
+    SELECT id, user_id, location_id, title, rating, likes, images, description, created_at
     FROM blog
     ORDER BY id ASC
 `;
@@ -98,9 +99,51 @@ const getBlogByLocationId = async (request, response) => {
   }
 };
 
+const deleteBlog = async (request, response) => {
+  const { blog_id } = request.body;
+
+  const deleteBlogByIdQuery = `DELETE FROM blog WHERE id = $1`;
+  const deleteBlogByIdParams = [blog_id];
+
+  try {
+    const result = await pool.query(deleteBlogByIdQuery, deleteBlogByIdParams);
+    console.log("🎉 blog deleted");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error deleting blog: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
+const updateBlog = async (request, response) => {
+  const { blog_id, title, description, blog_content, images, rating } =
+    request.body;
+
+  const updateBlogByIdQuery = `UPDATE blog SET title = $1, description = $2, blog_content = $3, rating = $4, images = $5 WHERE id = $6;`;
+  const updateBlogByIdParams = [
+    title,
+    description,
+    blog_content,
+    rating,
+    images,
+    blog_id,
+  ];
+
+  try {
+    const result = await pool.query(updateBlogByIdQuery, updateBlogByIdParams);
+    console.log("🎉 blog deleted");
+    response.status(200).json({ data: result.rows });
+  } catch (error) {
+    console.error("⚠️ error deleting blog: ", error);
+    response.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   getAllBlogs,
   createBlog,
+  deleteBlog,
+  updateBlog,
   getBlogById,
   getBlogByLocationId,
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, useDisclosure } from "@nextui-org/react";
+import { Button, Spinner, useDisclosure } from "@nextui-org/react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { UseUserContext } from "../context/userContext";
@@ -8,8 +8,6 @@ export default function HeroSection() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [modalType, setModalType] = useState(true);
   const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
-
-  console.log(loading, userLoggedIn);
 
   const handleUserLoginForm = () => {
     setModalType(true);
@@ -27,7 +25,8 @@ export default function HeroSection() {
         <div className="absolute">
           <div className="bg-gray-900/70 h-auto p-12 max-w-4xl m-10 ">
             <h1 className="text-8xl text-white font-thin ">
-              Welcome To The Connector
+              {loading && <Spinner size="lg" className="h-24 w-24 text-lg" />}
+              {loading ? "Loading Resource..." : "Welcome To The Connector"}
             </h1>
 
             <div className="divider"></div>

@@ -9,7 +9,7 @@ import {
   Input,
   Textarea,
 } from "@nextui-org/react";
-import locationAPI from "../api/locationAPI.js";
+import locationAPI from "../api/location.js";
 import { UseUserContext } from "../context/userContext";
 
 export default function LocationForm({
@@ -83,7 +83,7 @@ export default function LocationForm({
       console.log(locationData);
       const result = await locationAPI.updateLocation(locationData);
       console.log("Location Update Accomplished");
-      onClose;
+      onClose();
     } catch {
       console.log("Location Update Failed: ", error);
     }

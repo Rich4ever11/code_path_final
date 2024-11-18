@@ -1,32 +1,40 @@
 import React, { useState } from "react";
 import { Textarea, Button, Avatar } from "@nextui-org/react";
-import commentsAPI from "../api/commentsAPI.js";
+import commentsAPI from "../api/comments.js";
+import { UseUserContext } from "../context/userContext";
 
-export default function Comments({ commentsList, id, commentType }) {
-  const user_id = 1;
+export default function Comments({
+  commentsList,
+  id,
+  commentType,
+  profilePicture,
+}) {
+  const { currentUser, userDetails, userLoggedIn, loading } = UseUserContext();
   const [comment, setComment] = useState("");
 
   const handleCommentCreation = async () => {
-    // try {
-    if (commentType === "location") {
-      const requestBody = {
-        user_id: user_id,
-        location_id: id,
-        comment: comment,
-      };
-      console.log(requestBody);
-      const response = await commentsAPI.createLocationComment(requestBody);
-      setComment("");
-    } else if (commentType === "blog") {
-      const requestBody = {
-        user_id: user_id,
-        blog_id: id,
-        comment: comment,
-      };
+    try {
+      if (commentType === "location") {
+        const requestBody = {
+          user_id: userDetails.id,
+          location_id: id,
+          comment: comment,
+        };
+        console.log(requestBody);
+        const response = await commentsAPI.createLocationComment(requestBody);
+        setComment("");
+      } else if (commentType === "blog") {
+        const requestBody = {
+          user_id: userDetails.id,
+          blog_id: id,
+          comment: comment,
+        };
+        const response = await commentsAPI.createBlogComment(requestBody);
+        setComment("");
+      }
+    } catch (error) {
+      console.log("comment creation failed", error);
     }
-    // } catch {
-    //   console.log("comment creation failed");
-    // }
   };
 
   return (
@@ -41,10 +49,7 @@ export default function Comments({ commentsList, id, commentType }) {
         <div className="">
           <div className="w-full p-10 flex bg-black/30 border-2 border-white/5 rounded-md shadow-lg shadow-black">
             <div className="border-medium border-cyan-100 rounded-full p-1 h-fit w-fit flex-none align-middle mr-4">
-              <Avatar
-                src="https://i.pravatar.cc/150?u=a04258114e29026708c"
-                className="w-24 h-24 text-large"
-              />
+              <Avatar src={profilePicture} className="w-24 h-24 text-large" />
             </div>
             <div className="flex-1">
               <Textarea
@@ -53,6 +58,7 @@ export default function Comments({ commentsList, id, commentType }) {
                 labelPlacement="outside"
                 placeholder="Enter your comment"
                 className="max-full"
+                value={comment}
                 onChange={(event) => setComment(event.target.value)}
               />
 
