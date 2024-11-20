@@ -37,7 +37,7 @@ AWS S3 (USER IMAGES/FILES)
 
 ## Features
 
-### User Profile Creation/Authentication
+### ✅  User Profile Creation/Authentication
 
 Users will be given the ability to create a profile and login with said created profile. The data a user can add and store includes 3 to 5 pictures of the user, credentials used for authentication, what interests they have, physical attributes, hobbies and much more.
 
@@ -58,16 +58,16 @@ Users will be able to search other users on the web application through either t
 ![ezgif-2-20612010c1](https://github.com/user-attachments/assets/6d8d1a05-83fc-4ac2-bef9-c316baac1174)
 
 
-### Send Location -> Accept/Reject -> Communication Channel Opened
+### ✅ Send Connection -> Accept/Reject -> Communication Channel Opened
 
 Once two users are interested both users can send exactly one location that they would like to meet and interact at. This can be from our database of locations or a location not yet added. From there if the other user accepts the location a communication channel is initiated and both users can start communicating and setting up a date to meet up.
 
 
-### Comment On, Rate and Open Forum Discuss Locations They Have Visited With Other Users
+### ✅ Comment On, Rate and Open Forum Discuss Locations They Have Visited With Other Users
 
 Allow a user to make comments on a location, reply to comments on a location and give a rating 1/5 on a location. Also allow for a user to verify that they visited a location and upon verification an indication is added to the users comment or profile
 
-### Comment Creation And Render
+### ✅ Comment Creation And Render
 ![ezgif-2-1d7d45984e](https://github.com/user-attachments/assets/88d691da-7838-403f-8665-131dd6cb28fc)
 
 
